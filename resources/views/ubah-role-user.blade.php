@@ -33,7 +33,7 @@
               <h5 class="card-title">Cari Data User</h5>
 
               <!-- General Form Elements -->
-              <form method="post" action="{{ url('ubah-role/user') }}">
+              <form method="post" action="{{ url('ubah-role-user') }}">
                 @csrf
                 @method("GET")
 

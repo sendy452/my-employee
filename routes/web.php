@@ -51,7 +51,7 @@ Route::get('activate-user/{idkaryawan}', [KaryawanController::class, 'activateUs
 Route::get('deactivate-user/{idkaryawan}', [KaryawanController::class, 'deactivateUser']); 
 
 //Role Data
-Route::get('ubah-role/user', [RoleController::class, 'ubahRoleUser']); 
+Route::get('ubah-role-user', [RoleController::class, 'ubahRoleUser']); 
 Route::put('change-role', [RoleController::class, 'changeRole'])->name('change.role'); 
 Route::get('list-role', [RoleController::class, 'index']);
 Route::post('add-role', [RoleController::class, 'addRole'])->name('add.role'); 
@@ -91,14 +91,14 @@ Route::get('edit-penilaian-keahlian', [ManajemenPenilaianController::class, 'edi
 Route::put('change-penilaian-keahlian', [ManajemenPenilaianController::class, 'changePenilaianKeahlian'])->name('change.penilaian.keahlian'); 
 
 //Laporan Penilaian Kinerja
-Route::get('laporan-penilaian-kinerja/divisi', [LaporanKinerjaController::class, 'laporanDivisi']);
+Route::get('laporan-penilaian-kinerja-divisi', [LaporanKinerjaController::class, 'laporanDivisi']);
 Route::get('export-divisi-pdf/{bulan}/{id_divisi}', [LaporanKinerjaController::class, 'exportDivisi']);
 Route::get('laporan-penilaian-kinerja', [LaporanKinerjaController::class, 'laporanKaryawan']);
 Route::get('export-karyawan-pdf/{bulan}/{id_karyawan}', [LaporanKinerjaController::class, 'exportKaryawanPDF']);
 Route::get('export-karyawan-excel/{bulan}/{id_karyawan}', [LaporanKinerjaController::class, 'exportKaryawanExcel']);
 
 //Laporan Penilaian Keahlian
-Route::get('laporan-penilaian-keahlian/divisi', [LaporanKeahlianController::class, 'laporanDivisi']);
+Route::get('laporan-penilaian-keahlian-divisi', [LaporanKeahlianController::class, 'laporanDivisi']);
 Route::get('export-keahlian-divisi-pdf/{bulan}/{id_divisi}', [LaporanKeahlianController::class, 'exportDivisi']);
 Route::get('laporan-penilaian-keahlian', [LaporanKeahlianController::class, 'laporanKaryawan']);
 Route::get('export-keahlian-pdf/{bulan}/{id_karyawan}/{id_divisi}', [LaporanKeahlianController::class, 'exportKaryawanPDF']);

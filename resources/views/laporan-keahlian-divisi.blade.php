@@ -33,7 +33,7 @@
               <h5 class="card-title">List Penilaian Keahlian Tiap Divisi</h5>
               
               <!-- General Form Elements -->
-              <form method="post" action="{{ url('laporan-penilaian-keahlian/divisi') }}">
+              <form method="post" action="{{ url('laporan-penilaian-keahlian-divisi') }}">
                 @csrf
                 @method("GET")
 

@@ -1,16 +1,16 @@
 
-<?php $__env->startSection('title', 'Laporan Keahlian'); ?>
+<?php $__env->startSection('title', 'Laporan Kinerja'); ?>
 <?php $__env->startSection('content'); ?>
 
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Laporan Keahlian Per Divisi</h1>
+      <h1>Laporan Kinerja Per Divisi</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>">Dashboard</a></li>
-          <li class="breadcrumb-item">Laporan Keahlian</li>
-          <li class="breadcrumb-item active">Laporan Keahlian Per Divisi</li>
+          <li class="breadcrumb-item">Laporan Kinerja</li>
+          <li class="breadcrumb-item active">Laporan Kinerja Per Divisi</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -30,15 +30,15 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">List Penilaian Keahlian Tiap Divisi</h5>
+              <h5 class="card-title">List Penilaian Kinerja Tiap Divisi</h5>
               
               <!-- General Form Elements -->
-              <form method="post" action="<?php echo e(url('laporan-penilaian-keahlian-divisi')); ?>">
+              <form method="post" action="<?php echo e(url('laporan-penilaian-kinerja-divisi')); ?>">
                 <?php echo csrf_field(); ?>
                 <?php echo method_field("GET"); ?>
 
                 <div class="row mb-3">
-                  <label for="inputDivisi" class="col-sm-2 col-form-label">Pilih Divisi Tujuan</label>
+                  <label for="inputtDivisi" class="col-sm-2 col-form-label">Pilih Divisi</label>
                   <div class="col-sm-10">
                   <select class="form-select" name="id_divisi">
                       <?php $__currentLoopData = $divisi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -76,7 +76,7 @@
   
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">List Penilaian Keahlian Per Divisi <a href="<?php echo e(url('export-keahlian-divisi-pdf/'.date('F-Y',strtotime($bulan)).'/'.$id_divisi)); ?>" type="button" class="btn btn-danger float-end" <?php echo e($bulan == null ? "hidden" : ""); ?>>Cetak PDF</a></h5>
+                <h5 class="card-title">List Penilaian Kinerja Per Divisi <a href="<?php echo e(url('export-divisi-pdf/'.date('F-Y',strtotime($bulan)).'/'.$id_divisi)); ?>" type="button" class="btn btn-danger float-end" <?php echo e($bulan == null ? "hidden" : ""); ?>>Cetak PDF</a></h5>
   
                 <!-- Default Table -->
                 <table class="table table-bordered dataTable">
@@ -86,24 +86,22 @@
                       <th scope="col">NIP</th>
                       <th scope="col">Nama Karyawan</th>
                       <th scope="col">Email</th>
-                      <th scope="col">Divisi Asal</th>
-                      <th scope="col">Divisi Tujuan</th>
+                      <th scope="col">Divisi</th>
                       <th scope="col">Penilaian Bulan</th>
                       <th scope="col">Total Nilai</th>
                     </tr>
                   </thead>
                   <tbody>        
                     
-                    <?php $__currentLoopData = $keahlian_divisi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $no => $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $kinerja_divisi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $no => $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>          
                       <th scope="row"><input type="text" class="form-control" name="id_keahlian" value="<?php echo e($data->id_keahlian); ?>" hidden><?php echo e($no+1); ?></th>
                       <td><?php echo e($data->nip); ?></td>
                       <td><?php echo e($data->nama); ?></td>
                       <td><?php echo e($data->email); ?></td>
-                      <td><?php $__currentLoopData = $bio; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <?php echo e($b->id_karyawan == $data->id_karyawan ? $b->nama_divisi.' - '.$b->bidang : ""); ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></td>
                       <td><?php echo e($data->nama_divisi); ?> - <?php echo e($data->bidang); ?></td>
                       <td><?php echo e($data->bulan); ?></td>
-                      <td><?php echo e($data->total); ?>%</td>
+                      <td><?php echo e($data->total); ?></td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </tbody>
@@ -117,4 +115,4 @@
       </section>
 
   </main>
-<?php echo $__env->make('layouts.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Apk\laragon\www\my-employee\resources\views/laporan-keahlian-divisi.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Apk\laragon\www\my-employee\resources\views/laporan-kinerja-divisi.blade.php ENDPATH**/ ?>
