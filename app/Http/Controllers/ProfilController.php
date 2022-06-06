@@ -28,15 +28,9 @@ class ProfilController extends Controller
         $data = $request->all();
         $validator = Validator::make($data, [
             'email' => 'email|unique:tb_karyawan,email,'.Session::get('id_karyawan').',id_karyawan',
-            'nama' => 'string',
-            'nik' => 'numeric|unique:tb_karyawan,nik,'.Session::get('id_karyawan').',id_karyawan',
-            'nip' => 'string|unique:tb_karyawan,nip,'.Session::get('id_karyawan').',id_karyawan',
-            'nohp' => 'numeric|unique:tb_karyawan,nohp,'.Session::get('id_karyawan').',id_karyawan',
-            'tlahir' => 'string',
-            'tgllahir' => 'date',
-            'alamat' => 'string',
-            'negara' => 'string',
-            'jekel' => 'string'
+            'nik' => 'unique:tb_karyawan,nik,'.Session::get('id_karyawan').',id_karyawan',
+            'nip' => 'unique:tb_karyawan,nip,'.Session::get('id_karyawan').',id_karyawan',
+            'nohp' => 'unique:tb_karyawan,nohp,'.Session::get('id_karyawan').',id_karyawan',
         ],[
             'email.unique' => 'Email telah didaftarkan akun lain.',
             'nik.unique' => 'NIK/KTP telah didaftarkan akun lain.',
