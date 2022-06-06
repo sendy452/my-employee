@@ -157,21 +157,21 @@
                     <div class="row mb-3">
                       <label for="Nik" class="col-md-4 col-lg-3 col-form-label">NIK/KTP</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="nik" type="number" class="form-control" value="{{$data->nik}}">
+                        <input name="nik" type="number" class="form-control" value="{{$data->nik}}" required>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Nip" class="col-md-4 col-lg-3 col-form-label">NIP</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="nip" type="text" class="form-control" value="{{$data->nip}}">
+                        <input name="nip" type="text" class="form-control" value="{{$data->nip}}" required>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="No HP" class="col-md-4 col-lg-3 col-form-label">No HP</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="nohp" type="number" class="form-control" value="{{$data->nohp}}">
+                        <input name="nohp" type="number" class="form-control" value="{{$data->nohp}}" required>
                       </div>
                     </div>
 
