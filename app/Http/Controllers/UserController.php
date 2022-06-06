@@ -21,7 +21,7 @@ class UserController extends Controller
         $email = $request->email;
         $password = $request->password;
 
-        $data = User::leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')->where('email',$email)->where('is_active',1)->first();
+        $data = User::leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')->where('email',$email)->where('tb_karyawan.is_active',1)->first();
         if($data){ 
             if(Hash::check($password,$data->password) && $data->id_role == 1){
                 Auth::loginUsingId($data->id_karyawan);
