@@ -30,7 +30,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">List Penilaian Kinerja Tiap Divisi</h5>
+              <h5 class="card-title">Penilaian Kinerja Per Divisi</h5>
               
               <!-- General Form Elements -->
               <form method="post" action="<?php echo e(url('laporan-penilaian-kinerja-divisi')); ?>">
@@ -56,7 +56,7 @@
                 
                 <div class="row mb-3 text-end">
                   <div class="col-sm-12">
-                    <button type="submit" class="btn btn-primary">Tampilkan Keahlian</button>
+                    <button type="submit" class="btn btn-primary">Tampilkan Kinerja</button>
                   </div>
                 </div>
 
@@ -76,9 +76,10 @@
   
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">List Penilaian Kinerja Per Divisi <a href="<?php echo e(url('export-divisi-pdf/'.date('F-Y',strtotime($bulan)).'/'.$id_divisi)); ?>" type="button" class="btn btn-danger float-end" <?php echo e($bulan == null ? "hidden" : ""); ?>>Cetak PDF</a></h5>
+                <h5 class="card-title">Penilaian Kinerja Per Divisi<a href="<?php echo e(url('export-divisi-pdf/'.date('F-Y',strtotime($bulan)).'/'.$id_divisi)); ?>" type="button" class="btn btn-danger float-end" <?php echo e($bulan == null ? "hidden" : ""); ?>>Cetak PDF</a></h5>
   
-                <!-- Default Table -->
+                <div class="table-responsive">
+                  <!-- Default Table -->
                 <table class="table table-bordered dataTable">
                   <thead>
                     <tr>
@@ -107,6 +108,7 @@
                   </tbody>
                 </table>
                 <!-- End Default Table Example -->
+                </div>
               </div>
             </div>
 

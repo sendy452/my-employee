@@ -73,6 +73,7 @@
               <div class="card-body">
                 <h5 class="card-title">List Kategori Penilaian Kinerja</h5>
   
+                <div class="table-responsive">
                 <!-- Default Table -->
                 <table class="table table-bordered">
                   <thead>
@@ -92,7 +93,7 @@
                       @method("PUT")          
                       
                       <th scope="row"><input type="text" class="form-control" name="id_kategori" value="{{$data->id_kategori}}" hidden>{{$no+1}}</th>
-                      <td><input type="text" class="form-control" name="kategori" value="{{$data->kategori}}"></td>
+                      <td><input style="width: auto;" type="text" class="form-control" name="kategori" value="{{$data->kategori}}"></td>
                       <td><input type="number" class="form-control" name="bobot" value="{{$data->bobot}}"></td>
                       <td><button type="submit" class="btn btn-success">Ubah</button> <!--a href="{{url('hapus-kategori').'/'.$data->id_kategori}}" class="btn btn-danger" type="button">Hapus</a--></td>
                       
@@ -102,6 +103,7 @@
                   </tbody>
                 </table>
                 <!-- End Default Table Example -->
+                </div>
               </div>
             </div>
 
@@ -137,7 +139,7 @@
                     </select>     
                     </div>
                   </div>
-                  <div class="row mb-3" style="flex-wrap: nowrap;">
+                  <div class="row mb-3">
                     <label for="inputBobot" class="col-sm-2 col-form-label">Bobot</label>
                     <div class="col-sm-10">
                       <div class="input-group">
@@ -176,6 +178,7 @@
                 <div class="card-body">
                   <h5 class="card-title">List Penilaian Kinerja</h5>
     
+                  <div class="table-responsive">
                   <!-- Default Table -->
                   <table class="table table-bordered">
                     <thead>
@@ -197,15 +200,15 @@
                         @method("PUT")     
 
                         <th scope="row"><input type="text" class="form-control" name="id_kinerja" value="{{$kinerja->id_kinerja}}" hidden>{{$no+1}}</th>
-                        <td><input type="text" class="form-control" name="kinerja" value="{{$kinerja->kinerja}}"></td>
+                        <td><input type="text" style="width: auto;" class="form-control" name="kinerja" value="{{$kinerja->kinerja}}"></td>
                         <td>
-                            <select class="form-select" name="id_kategori">
+                            <select style="width: auto;" class="form-select" name="id_kategori">
                                 @foreach($kategori as $data)
                                 <option value="{{$data->id_kategori}}" {{ $data->id_kategori == $kinerja->id_kategori ? "selected" : "" }}>{{$data->kategori}}</option>
                                 @endforeach
                             </select>  
                         </td>
-                        <td><input type="number" class="form-control" name="bobot" value="{{$kinerja->bobot}}"></td>
+                        <td><input style="width: auto;" type="number" class="form-control" name="bobot" value="{{$kinerja->bobot}}"></td>
                         <td><input type="number" class="form-control" name="target" value="{{$kinerja->target}}"></td>
                         <td><button type="submit" class="btn btn-success">Ubah</button> <a href="{{url('hapus-kinerja').'/'.$kinerja->id_kinerja}}" class="btn btn-danger" type="button">Hapus</a></td>
                         
@@ -216,6 +219,7 @@
                     </tbody>
                   </table>
                   <!-- End Default Table Example -->
+                  </div>
                 </div>
               </div>
   

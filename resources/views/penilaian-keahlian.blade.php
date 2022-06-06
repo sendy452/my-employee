@@ -88,6 +88,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Form Penilaian Keahlian</h5>
 
+                  <div class="table-responsive">
                   <!-- Default Table -->
                   <table class="table table-bordered">
                     <tbody>               
@@ -203,6 +204,7 @@
                     </tbody>
                   </table>
                   <!-- End Default Table Example -->
+                  </div>
     
                 </div>
             </div>

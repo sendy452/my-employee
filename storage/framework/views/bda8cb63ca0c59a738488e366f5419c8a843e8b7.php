@@ -78,7 +78,8 @@
               <div class="card-body">
                 <h5 class="card-title">List Data Karyawan</h5>
   
-                <!-- Default Table -->
+                <div class="table-responsive">
+                  <!-- Default Table -->
                 <table class="table table-bordered dataTable">
                   <thead>
                     <tr>
@@ -106,6 +107,7 @@
                   </tbody>
                 </table>
                 <!-- End Default Table Example -->
+                </div>
               </div>
             </div>
 

@@ -52,7 +52,7 @@
                   </select>     
                   </div>
                 </div>
-                <div class="row mb-3" style="flex-wrap: nowrap;">
+                <div class="row mb-3">
                   <label for="inputBobot" class="col-sm-2 col-form-label">Bobot</label>
                   <div class="col-sm-10">
                     <div class="input-group">
@@ -126,7 +126,8 @@
               <div class="card-body">
                 <h5 class="card-title">List Penilaian Keahlian</h5>
   
-                <!-- Default Table -->
+                <div class="table-responsive">
+                  <!-- Default Table -->
                 <table class="table table-bordered">
                   <thead>
                     <tr>
@@ -146,9 +147,9 @@
                       @method("PUT")          
                       
                       <th scope="row"><input type="text" class="form-control" name="id_keahlian" value="{{$data->id_keahlian}}" hidden>{{$no+1}}</th>
-                      <td><input type="text" class="form-control" name="keahlian" value="{{$data->keahlian}}"></td>
+                      <td><input style="width: auto;" type="text" class="form-control" name="keahlian" value="{{$data->keahlian}}"></td>
                       <td>{{$data->nama_divisi}} - {{$data->bidang}}</td>
-                      <td><input type="number" class="form-control" name="bobot" value="{{$data->bobot}}"></td>
+                      <td><input style="width: auto;" type="number" class="form-control" name="bobot" value="{{$data->bobot}}"></td>
                       <td><button type="submit" class="btn btn-success">Ubah</button> <a href="{{url('hapus-keahlian').'/'.$data->id_keahlian}}" class="btn btn-danger" type="button">Hapus</a></td>
                       
                       </form>
@@ -157,6 +158,7 @@
                   </tbody>
                 </table>
                 <!-- End Default Table Example -->
+                </div>
               </div>
             </div>
 

@@ -42,7 +42,7 @@
                         <input type="text" class="form-control" name="nama_divisi">
                     </div>
                 </div>
-                <div class="row mb-3" style="flex-wrap: nowrap;">
+                <div class="row mb-3">
                   <label for="inputBidang" class="col-sm-2 col-form-label">Bidang</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" name="bidang">
@@ -72,7 +72,8 @@
               <div class="card-body">
                 <h5 class="card-title">List Data Divisi</h5>
   
-                <!-- Default Table -->
+                <div class="table-responsive">
+                  <!-- Default Table -->
                 <table class="table table-bordered">
                   <thead>
                     <tr>
@@ -91,9 +92,9 @@
                       @csrf
                       @method("PUT")          
                       
-                      <th scope="row"><input type="text" class="form-control" name="id_divisi" value="{{$data->id_divisi}}" hidden>{{$no+1}}</th>
-                      <td><input type="text" class="form-control" name="nama_divisi" value="{{$data->nama_divisi}}"></td>
-                      <td><input type="text" class="form-control" name="bidang" value="{{$data->bidang}}"></td>
+                      <th scope="row"><input type="text" name="id_divisi" value="{{$data->id_divisi}}" hidden>{{$no+1}}</th>
+                      <td><input type="text" style="width: auto;" class="form-control" name="nama_divisi" value="{{$data->nama_divisi}}"></td>
+                      <td><input type="text" style="width: auto;" class="form-control" name="bidang" value="{{$data->bidang}}"></td>
                       <td>{{$data->is_active == 1 ? 'Aktif' : 'Tidak Aktif'}}</td>
                       <td><button type="submit" class="btn btn-warning">Ubah</button>
                         <a style="width:110px" href="{{$data->is_active == 1 ? url('hapus-divisi').'/'.$data->id_divisi : url('activate-divisi').'/'.$data->id_divisi}}" class="btn {{$data->is_active == 1 ? 'btn-danger' : 'btn-success'}}" type="button">{{$data->is_active == 1 ? 'Deaktivasi' : 'Aktivasi'}}</a>
@@ -105,6 +106,7 @@
                   </tbody>
                 </table>
                 <!-- End Default Table Example -->
+                </div>
               </div>
             </div>
 

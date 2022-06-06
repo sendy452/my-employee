@@ -87,50 +87,13 @@
           </div>
           <!-- End Keahlian Card -->
 
-          <!-- Recent Karyawan -->
-          <div class="col-8">
-            <div class="card recent-sales overflow-auto" id="table">
-              <div class="card-body">
-                <h5 class="card-title">Data Karyawan Terakhir Ditambahkan</h5>
-
-                <table class="table table-borderless">
-                  <thead>
-                    <tr>
-                      <th scope="col">NIP</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Nama</th>
-                      <th scope="col">Divisi</th>
-                      <th scope="col">Bidang</th>
-                      <th scope="col">Tanggal Kerja</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php $__currentLoopData = $karyawan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <tr>
-                      <th scope="row"><?php echo e($data->nip); ?></th>
-                      <td><?php echo e($data->email); ?></td>
-                      <td><?php echo e($data->nama); ?></td>
-                      <td><?php echo e($data->nama_divisi); ?></td>
-                      <td><?php echo e($data->bidang); ?></td>
-                      <td><?php echo e(date('d-m-Y', strtotime($data->dibuat))); ?></td>
-                    </tr>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                  </tbody>
-                </table>
-
-              </div>
-
-            </div>
-          </div>
-          <!-- End Recent Karyawan -->
-
-          <div class="col-lg-4">
+          <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Total Karyawan Tiap Bulan <?php echo e(date('Y')); ?></h5>
 
                 <!-- Line Chart -->
-                <canvas id="lineChart" style="max-height: 450px;"></canvas>
+                <canvas id="lineChart" style="max-height: 400px;"></canvas>
                 <script>
                   const labels = <?php echo json_encode($labels); ?>;
                   const datas = <?php echo json_encode($datas); ?>;
@@ -162,6 +125,43 @@
               </div>
             </div>
           </div>
+
+          <!-- Recent Karyawan -->
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Data Karyawan Terakhir Ditambahkan</h5>
+                <div class="table-responsive">
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">NIP</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Nama</th>
+                      <th scope="col">Divisi</th>
+                      <th scope="col">Bidang</th>
+                      <th scope="col">Tanggal Kerja</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php $__currentLoopData = $karyawan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <tr>
+                      <th scope="row"><?php echo e($data->nip); ?></th>
+                      <td><?php echo e($data->email); ?></td>
+                      <td><?php echo e($data->nama); ?></td>
+                      <td><?php echo e($data->nama_divisi); ?></td>
+                      <td><?php echo e($data->bidang); ?></td>
+                      <td><?php echo e(date('d-m-Y', strtotime($data->dibuat))); ?></td>
+                    </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                  </tbody>
+                </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- End Recent Karyawan -->
 
         </div>
       </div>
