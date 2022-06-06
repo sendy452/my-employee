@@ -85,19 +85,19 @@
                     </div>
                     <div class="col-md-6">
                       <label for="inputNIK" class="form-label">NIK/KTP</label>
-                      <input name="nik" type="number" class="form-control" value="{{$data->nik}}" required>
+                      <input name="nik" type="number" class="form-control" value="{{$data->nik}}">
                     </div>
                     <div class="col-md-6">
                       <label for="inputNIP" class="form-label">NIP</label>
-                      <input name="nip" type="text" class="form-control" value="{{$data->nip}}" required>
+                      <input name="nip" type="text" class="form-control" value="{{$data->nip}}">
                     </div>
                     <div class="col-12">
                       <label for="inputEmail" class="form-label">Email</label>
-                      <input name="email" type="email" class="form-control" value="{{$data->email}}" required>
+                      <input name="email" type="email" class="form-control" value="{{$data->email}}">
                     </div>
                     <div class="col-12">
                       <label for="inputNoHP" class="form-label">No HP</label>
-                      <input name="nohp" type="number" class="form-control" value="{{$data->nohp}}" required>
+                      <input name="nohp" type="number" class="form-control" value="{{$data->nohp}}">
                     </div>
                     <div class="col-md-6">
                       <label for="inputTLahir" class="form-label">Tempat Lahir</label>
