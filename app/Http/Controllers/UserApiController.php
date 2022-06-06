@@ -30,20 +30,32 @@ class UserApiController extends Controller
         return $this->respondWithToken($token);
     }
  
+    public function refreshToken()
+    {
+        return response()->json([
+            'status' => 'success',
+            'token' => auth('api')->refresh(),
+            'type' => 'bearer',
+            // 'user' => auth('api')->user(),
+            // 'authorisation' => [
+            //     'token' => auth('api')->refresh(),
+            //     'type' => 'bearer',
+            // ]
+        ]);
+    }
+
     public function update(Request $request, $idkaryawan)
     {
         //Validate data
         $data = $request->all();
         $validator = Validator::make($data, [
-            'nama' => 'string',
-            'nik' => 'numeric',
-            'nip' => 'string',
-            'nohp' => 'numeric',
-            'tlahir' => 'string',
-            'tgllahir' => 'date',
-            'alamat' => 'string',
-            'negara' => 'string',
-            'jekel' => 'string'
+            'nik' => 'unique:tb_karyawan,nik,'.$request->id_karyawan.',id_karyawan',
+            'nip' => 'unique:tb_karyawan,nip,'.$request->id_karyawan.',id_karyawan',
+            'nohp' => 'unique:tb_karyawan,nohp,'.$request->id_karyawan.',id_karyawan'
+        ],[
+            'nik.unique' => 'NIK/KTP telah didaftarkan akun lain.',
+            'nip.unique' => 'NIP telah didaftarkan akun lain.',
+            'nohp.unique' => 'No. Hp telah didaftarkan akun lain.',
         ]);
 
         //Send failed response if request is not valid
