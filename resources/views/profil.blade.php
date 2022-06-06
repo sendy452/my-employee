@@ -98,7 +98,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Tanggal Lahir</div>
-                    <div class="col-lg-9 col-md-8">{{date('d-m-Y', strtotime($data->tgllahir)) ?? ""}}</div>
+                    <div class="col-lg-9 col-md-8">{{date('d-m-Y', strtotime($data->tgllahir)) ?? " "}}</div>
                   </div>
 
                   <div class="row">
