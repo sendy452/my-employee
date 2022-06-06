@@ -101,7 +101,7 @@
                       <td>{{$data->nama_divisi}}</td>
                       <td>{{$data->bidang}}</td>
                       <td>{{date('d-m-Y', strtotime($data->dibuat))}}</td>
-                      <td>{{$data->is_active == 1 ? 'Aktif' : 'Tidak Aktif'}}</td>
+                      <td>{{$data->aktif == 1 ? 'Aktif' : 'Tidak Aktif'}}</td>
                     </tr>
                     @endforeach
                   </tbody>

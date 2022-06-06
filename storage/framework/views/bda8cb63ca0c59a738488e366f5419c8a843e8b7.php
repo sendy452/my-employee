@@ -101,7 +101,7 @@
                       <td><?php echo e($data->nama_divisi); ?></td>
                       <td><?php echo e($data->bidang); ?></td>
                       <td><?php echo e(date('d-m-Y', strtotime($data->dibuat))); ?></td>
-                      <td><?php echo e($data->is_active == 1 ? 'Aktif' : 'Tidak Aktif'); ?></td>
+                      <td><?php echo e($data->aktif == 1 ? 'Aktif' : 'Tidak Aktif'); ?></td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </tbody>

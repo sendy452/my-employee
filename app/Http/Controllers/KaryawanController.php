@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Divisi;
 use Hash;
 use Illuminate\Support\Facades\Validator;
+use Mail;
 
 class KaryawanController extends Controller
 {
@@ -17,7 +18,7 @@ class KaryawanController extends Controller
     
     public function index()
     {
-        $karyawan = User::select('tb_karyawan.created_at as dibuat', 'tb_karyawan.*', 'tb_divisi.*', 'tb_role.*')->leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
+        $karyawan = User::select('tb_karyawan.created_at as dibuat', 'tb_karyawan.is_active as aktif', 'tb_karyawan.*', 'tb_divisi.*', 'tb_role.*')->leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
         ->leftJoin('tb_role', 'tb_karyawan.id_role', '=', 'tb_role.id_role')->get();
 
         return view('list-karyawan', ['karyawan' => $karyawan]);
@@ -32,6 +33,7 @@ class KaryawanController extends Controller
             'password' => 'string'
         ],[
             'nip.unique' => 'NIP telah didaftarkan sebelumnya.',
+            'nip.string' => 'NIP harus diisi.',
             'email.unique' => 'Email telah didaftarkan sebelumnya.',
         ]);
 
