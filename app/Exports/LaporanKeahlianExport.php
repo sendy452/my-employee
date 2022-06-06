@@ -30,8 +30,8 @@ class LaporanKeahlianExport implements FromView, WithStyles, ShouldAutoSize, Wit
         $divisi = Divisi::get();
         $penilaiankeahlian = PenilaianKeahlian::leftJoin('tb_keahlian', 'tb_penilaian_keahlian.id_keahlian', '=', 'tb_keahlian.id_keahlian')
         ->where('id_karyawan', $this->id_karyawan)->where('bulan', date('F-Y',strtotime($this->bulan)))->where('id_karyawan',$this->id_karyawan)->orderBy('tb_penilaian_keahlian.id_keahlian', 'asc')->get();
-        $totalkeahlian = TotalKeahlian::where('id_divisi', $this->id_divisi)->where('tb_total_keahlian.is_active', 1)->where('bulan', date('F-Y',strtotime($this->bulan)))->where('id_karyawan',$this->id_karyawan)->get();
-        $totalkeahlianakhir = TotalKeahlian::where('id_divisi', $this->id_divisi)->where('tb_total_keahlian.is_active', 1)->where('bulan', date('F-Y',strtotime($this->bulan.'last month')))->where('id_karyawan',$this->id_karyawan)->get();
+        $totalkeahlian = TotalKeahlian::where('id_divisi', $this->id_divisi)->where('is_active', 1)->where('bulan', date('F-Y',strtotime($this->bulan)))->where('id_karyawan',$this->id_karyawan)->get();
+        $totalkeahlianakhir = TotalKeahlian::where('id_divisi', $this->id_divisi)->where('is_active', 1)->where('bulan', date('F-Y',strtotime($this->bulan.'last month')))->where('id_karyawan',$this->id_karyawan)->get();
         $bio = User::leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
             ->leftJoin('tb_role', 'tb_karyawan.id_role', '=', 'tb_role.id_role')->where('id_karyawan',$this->id_karyawan)->get();
 

@@ -147,7 +147,7 @@ class PenilaianController extends Controller
 
     public function listKeahlian(Request $request)
     {
-        $keahlian = Keahlian::leftJoin('tb_divisi', 'tb_keahlian.id_divisi', '=', 'tb_divisi.id_divisi')->where('is_active',1)->where('tb_keahlian.id_divisi', $request->id_divisi)->get();
+        $keahlian = Keahlian::leftJoin('tb_divisi', 'tb_keahlian.id_divisi', '=', 'tb_divisi.id_divisi')->where('tb_keahlian.is_active',1)->where('tb_keahlian.id_divisi', $request->id_divisi)->get();
         $divisi = Divisi::orderBy('nama_divisi','asc')->get();
        
         return view('list-keahlian', ['keahlian' => $keahlian, 'divisi' => $divisi]);
