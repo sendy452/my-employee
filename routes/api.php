@@ -22,4 +22,5 @@ Route::group([
     Route::put('update/{idkaryawan}',  [UserApiController::class, 'update']);
     Route::post('logout', [UserApiController::class, 'logout']);
     Route::post('me', [UserApiController::class, 'me']);
+    Route::post('refresh', [UserApiController::class, 'refreshToken']);
 });
