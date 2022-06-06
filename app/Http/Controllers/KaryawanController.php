@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Divisi;
 use Hash;
 use Illuminate\Support\Facades\Validator;
-use Mail;
+use \App\Mail\SendMail;
 
 class KaryawanController extends Controller
 {
@@ -49,6 +49,13 @@ class KaryawanController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
+        $details = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+
+        \Mail::to($request->email)->send(new SendMail($details));
+        
         return redirect()->back()->with("message", "Data berhasil ditambahkan!");
     }    
 
