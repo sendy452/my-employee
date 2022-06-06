@@ -126,6 +126,7 @@
                       <label for="inputtDivisi" class="form-label">Divisi</label>
                       <select class="form-select" name="id_divisi" disabled>
                           @foreach($divisi as $divisi)
+                          <option></option>
                           <option value="{{$divisi->id_divisi}}" {{ $divisi->id_divisi == $data->id_divisi ? "selected" : "" }}>{{$divisi->nama_divisi}} - {{$divisi->bidang}}</option>
                           @endforeach
                       </select>     

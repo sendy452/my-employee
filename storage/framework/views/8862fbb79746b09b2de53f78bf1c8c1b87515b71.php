@@ -1,6 +1,6 @@
-@extends('layouts.template')
-@section('title', 'Ubah Karyawan')
-@section('content')
+
+<?php $__env->startSection('title', 'Ubah Karyawan'); ?>
+<?php $__env->startSection('content'); ?>
 
 <main id="main" class="main">
 
@@ -8,21 +8,21 @@
       <h1>Ubah Data Karyawan</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>">Dashboard</a></li>
           <li class="breadcrumb-item">Data Karyawan</li>
           <li class="breadcrumb-item active">Ubah Data Karyawan</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    @if($errors->any())
-        @foreach ($errors->all() as $danger)
-              <h6 class="alert alert-danger">{{ $danger }}</h6>
-        @endforeach
-      @endif
-    @if (session('message'))
-        <h6 class="alert alert-success">{{ session('message') }}</h6>
-    @endif
+    <?php if($errors->any()): ?>
+        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $danger): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <h6 class="alert alert-danger"><?php echo e($danger); ?></h6>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      <?php endif; ?>
+    <?php if(session('message')): ?>
+        <h6 class="alert alert-success"><?php echo e(session('message')); ?></h6>
+    <?php endif; ?>
 
     <section class="section">
       <div class="row">
@@ -33,18 +33,18 @@
               <h5 class="card-title">Cari Data Karyawan</h5>
 
               <!-- General Form Elements -->
-              <form method="post" action="{{ url('ubah-karyawan') }}">
-                @csrf
-                @method("GET")
+              <form method="post" action="<?php echo e(url('ubah-karyawan')); ?>">
+                <?php echo csrf_field(); ?>
+                <?php echo method_field("GET"); ?>
 
                 <div class="row mb-3">
                     <label for="Jenis Kelamin" class="col-md-4 col-lg-3 col-form-label">Email Karyawan</label>
                     <div class="col-md-8 col-lg-9">
                         <select onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' class="form-select" name="idkaryawan">
                             <option><h1>Pilih Email!</h1></option>
-                            @foreach($karyawan as $data)
-                            <option value="{{$data->id_karyawan}}">{{$data->email}}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $karyawan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($data->id_karyawan); ?>"><?php echo e($data->email); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                 </div>
@@ -73,72 +73,72 @@
                   <h5 class="card-title">Ubah Data Karyawan</h5>
     
                   <!-- Ubah Data Karyawan Form -->
-                  <form class="row g-3" method="post" action="{{ route('change.user') }}">
-                    @csrf
-                    @method("PUT")
+                  <form class="row g-3" method="post" action="<?php echo e(route('change.user')); ?>">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field("PUT"); ?>
 
-                    @foreach($bio as $data)
+                    <?php $__currentLoopData = $bio; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-md-12">
                       <label for="inputName" class="form-label">Nama Lengkap</label>
-                      <input name="id_karyawan" type="text" class="form-control" value="{{$data->id_karyawan}}" hidden>
-                      <input name="nama" type="text" class="form-control" value="{{$data->nama}}">
+                      <input name="id_karyawan" type="text" class="form-control" value="<?php echo e($data->id_karyawan); ?>" hidden>
+                      <input name="nama" type="text" class="form-control" value="<?php echo e($data->nama); ?>">
                     </div>
                     <div class="col-md-6">
                       <label for="inputNIK" class="form-label">NIK/KTP</label>
-                      <input name="nik" type="number" class="form-control" value="{{$data->nik}}">
+                      <input name="nik" type="number" class="form-control" value="<?php echo e($data->nik); ?>">
                     </div>
                     <div class="col-md-6">
                       <label for="inputNIP" class="form-label">NIP</label>
-                      <input name="nip" type="text" class="form-control" value="{{$data->nip}}">
+                      <input name="nip" type="text" class="form-control" value="<?php echo e($data->nip); ?>">
                     </div>
                     <div class="col-12">
                       <label for="inputEmail" class="form-label">Email</label>
-                      <input name="email" type="email" class="form-control" value="{{$data->email}}">
+                      <input name="email" type="email" class="form-control" value="<?php echo e($data->email); ?>">
                     </div>
                     <div class="col-12">
                       <label for="inputNoHP" class="form-label">No HP</label>
-                      <input name="nohp" type="number" class="form-control" value="{{$data->nohp}}">
+                      <input name="nohp" type="number" class="form-control" value="<?php echo e($data->nohp); ?>">
                     </div>
                     <div class="col-md-6">
                       <label for="inputTLahir" class="form-label">Tempat Lahir</label>
-                      <input name="tlahir" type="text" class="form-control" value="{{$data->tlahir}}">
+                      <input name="tlahir" type="text" class="form-control" value="<?php echo e($data->tlahir); ?>">
                     </div>
                     <div class="col-md-6">
                         <label for="inputTglLahir" class="form-label">Tanggal Lahir</label>
-                        <input name="tgllahir" type="date" class="form-control" value="{{$data->tgllahir}}">
+                        <input name="tgllahir" type="date" class="form-control" value="<?php echo e($data->tgllahir); ?>">
                     </div>
                     <div class="col-md-6">
                       <label for="inputAlamat" class="form-label">Alamat</label>                    
-                      <textarea name="alamat" class="form-control">{{$data->alamat}}</textarea>                      
+                      <textarea name="alamat" class="form-control"><?php echo e($data->alamat); ?></textarea>                      
                     </div>
                     <div class="col-md-6">
                       <label for="inputNegara" class="form-label">Negara</label>
-                      <input name="negara" type="text" class="form-control" value="{{$data->negara}}">
+                      <input name="negara" type="text" class="form-control" value="<?php echo e($data->negara); ?>">
                     </div>
                     <div class="col-md-2">
                         <label for="Jenis Kelamin" class="form-label">Jenis Kelamin</label>                        
                         <select class="form-select" name="jekel">
-                            <option value="Laki-Laki" {{ $data->jekel == "Laki-Laki" ? "selected" : "" }}>Laki-Laki</option>
-                            <option value="Perempuan" {{ $data->jekel == "Perempuan" ? "selected" : "" }}>Perempuan</option>
+                            <option value="Laki-Laki" <?php echo e($data->jekel == "Laki-Laki" ? "selected" : ""); ?>>Laki-Laki</option>
+                            <option value="Perempuan" <?php echo e($data->jekel == "Perempuan" ? "selected" : ""); ?>>Perempuan</option>
                         </select>                       
                     </div>
                     <div class="col-md-8">
                       <label for="inputtDivisi" class="form-label">Divisi</label>
                       <select class="form-select" name="id_divisi">
-                          @foreach($divisi as $divisi)
+                          <?php $__currentLoopData = $divisi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $divisi): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                           <option></option>
-                          <option value="{{$divisi->id_divisi}}" {{ $divisi->id_divisi == $data->id_divisi ? "selected" : "" }}>{{$divisi->nama_divisi}} - {{$divisi->bidang}}</option>
-                          @endforeach
+                          <option value="<?php echo e($divisi->id_divisi); ?>" <?php echo e($divisi->id_divisi == $data->id_divisi ? "selected" : ""); ?>><?php echo e($divisi->nama_divisi); ?> - <?php echo e($divisi->bidang); ?></option>
+                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                       </select>     
                     </div>
                     <div class="col-md-2">
                       <label for="inputRole" class="form-label">Role Akun</label>
-                      <input type="text" class="form-control" value="{{$data->role}}" disabled>
+                      <input type="text" class="form-control" value="<?php echo e($data->role); ?>" disabled>
                     </div>
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </form>
                   <!-- End Ubah Data Karyawan Form -->
     
@@ -150,3 +150,4 @@
       </section>
 
   </main>
+<?php echo $__env->make('layouts.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Apk\laragon\www\my-employee\resources\views/ubah-karyawan.blade.php ENDPATH**/ ?>
