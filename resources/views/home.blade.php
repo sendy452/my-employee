@@ -31,7 +31,7 @@
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                     <i class="bi bi-hand-thumbs-up"></i>
                   </div>
-                  <div class="ps-3">
+                  <div class="ps-2">
                     <h6>{{$terbaik->nama ?? null}}</h6>
                     <span class="text-muted small pt-2 ps-1">Dari</span> <span class="text-primary small pt-1 fw-bold">{{$c_karyawan}} Karyawan</span>
                   </div>
@@ -52,7 +52,7 @@
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                     <i class="bi bi-clipboard-check"></i>
                   </div>
-                  <div class="ps-3">
+                  <div class="ps-2">
                     <h6>{{$terbaik->total ?? null}}</h6>
                     <span class="text-muted small pt-2 ps-1">Penilaian Terendah</span> <span class="text-success small pt-1 fw-bold">{{$terendah->total ?? null}}</span>
 
@@ -75,7 +75,7 @@
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                     <i class="bi bi-award"></i>
                   </div>
-                  <div class="ps-3">
+                  <div class="ps-2">
                     <h6>{{$keahlian->keahlian}}</h6>
                     <span class="text-muted small pt-2 ps-1">Dengan nilai</span> <span class="text-danger small pt-1 fw-bold">{{$keahlian->nilai}}%</span>
                   </div>
