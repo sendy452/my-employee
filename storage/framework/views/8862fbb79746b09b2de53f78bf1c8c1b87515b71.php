@@ -125,8 +125,8 @@
                     <div class="col-md-8">
                       <label for="inputtDivisi" class="form-label">Divisi</label>
                       <select class="form-select" name="id_divisi">
-                          <?php $__currentLoopData = $divisi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $divisi): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                           <option></option>
+                          <?php $__currentLoopData = $divisi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $divisi): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                           <option value="<?php echo e($divisi->id_divisi); ?>" <?php echo e($divisi->id_divisi == $data->id_divisi ? "selected" : ""); ?>><?php echo e($divisi->nama_divisi); ?> - <?php echo e($divisi->bidang); ?></option>
                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                       </select>     

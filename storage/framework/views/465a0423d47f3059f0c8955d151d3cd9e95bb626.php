@@ -1,6 +1,6 @@
-@extends('layouts.template')
-@section('title', 'List Divisi')
-@section('content')
+
+<?php $__env->startSection('title', 'List Divisi'); ?>
+<?php $__env->startSection('content'); ?>
 
 <main id="main" class="main">
 
@@ -8,21 +8,21 @@
       <h1>List Data Divisi</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>">Dashboard</a></li>
           <li class="breadcrumb-item">Master Divisi</li>
           <li class="breadcrumb-item active">List Data Divisi</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    @if($errors->any())
-        @foreach ($errors->all() as $danger)
-              <h6 class="alert alert-danger">{{ $danger }}</h6>
-        @endforeach
-      @endif
-    @if (session('message'))
-        <h6 class="alert alert-success">{{ session('message') }}</h6>
-    @endif
+    <?php if($errors->any()): ?>
+        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $danger): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <h6 class="alert alert-danger"><?php echo e($danger); ?></h6>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      <?php endif; ?>
+    <?php if(session('message')): ?>
+        <h6 class="alert alert-success"><?php echo e(session('message')); ?></h6>
+    <?php endif; ?>
 
     <section class="section">
       <div class="row">
@@ -33,8 +33,8 @@
               <h5 class="card-title">Tambah Divisi</h5>
 
               <!-- General Form Elements -->
-              <form method="post" action="{{ route('add.divisi') }}">
-                @csrf
+              <form method="post" action="<?php echo e(route('add.divisi')); ?>">
+                <?php echo csrf_field(); ?>
 
                 <div class="row mb-3">
                     <label for="inputDivisi" class="col-sm-2 col-form-label">Nama Divisi</label>
@@ -85,23 +85,23 @@
                   </thead>
                   <tbody>        
                     
-                    @foreach($divisi as $no => $data)
+                    <?php $__currentLoopData = $divisi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $no => $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>          
-                      <form method="post" action="{{ route('change.divisi') }}">
-                      @csrf
-                      @method("PUT")          
+                      <form method="post" action="<?php echo e(route('change.divisi')); ?>">
+                      <?php echo csrf_field(); ?>
+                      <?php echo method_field("PUT"); ?>          
                       
-                      <th scope="row"><input type="text" class="form-control" name="id_divisi" value="{{$data->id_divisi}}" hidden>{{$no+1}}</th>
-                      <td><input type="text" class="form-control" name="nama_divisi" value="{{$data->nama_divisi}}"></td>
-                      <td><input type="text" class="form-control" name="bidang" value="{{$data->bidang}}"></td>
-                      <td>{{$data->is_active == 1 ? 'Aktif' : 'Tidak Aktif'}}</td>
+                      <th scope="row"><input type="text" class="form-control" name="id_divisi" value="<?php echo e($data->id_divisi); ?>" hidden><?php echo e($no+1); ?></th>
+                      <td><input type="text" class="form-control" name="nama_divisi" value="<?php echo e($data->nama_divisi); ?>"></td>
+                      <td><input type="text" class="form-control" name="bidang" value="<?php echo e($data->bidang); ?>"></td>
+                      <td><?php echo e($data->is_active == 1 ? 'Aktif' : 'Tidak Aktif'); ?></td>
                       <td><button type="submit" class="btn btn-warning">Ubah</button>
-                        <a style="width:110px" href="{{$data->is_active == 1 ? url('hapus-divisi').'/'.$data->id_divisi : url('activate-divisi').'/'.$data->id_divisi}}" class="btn {{$data->is_active == 1 ? 'btn-danger' : 'btn-success'}}" type="button">{{$data->is_active == 1 ? 'Deaktivasi' : 'Aktivasi'}}</a>
+                        <a style="width:110px" href="<?php echo e($data->is_active == 1 ? url('hapus-divisi').'/'.$data->id_divisi : url('activate-divisi').'/'.$data->id_divisi); ?>" class="btn <?php echo e($data->is_active == 1 ? 'btn-danger' : 'btn-success'); ?>" type="button"><?php echo e($data->is_active == 1 ? 'Deaktivasi' : 'Aktivasi'); ?></a>
                       </td>
                       
                       </form>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </tbody>
                 </table>
                 <!-- End Default Table Example -->
@@ -113,3 +113,4 @@
       </section>
 
   </main>
+<?php echo $__env->make('layouts.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Apk\laragon\www\my-employee\resources\views/list-divisi.blade.php ENDPATH**/ ?>

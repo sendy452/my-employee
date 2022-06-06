@@ -200,7 +200,7 @@ class ManajemenPenilaianController extends Controller
     public function penilaianKeahlian(Request $request)
     {
         $karyawan = User::where('is_active', 1)->get();
-        $divisi = Divisi::get();
+        $divisi = Divisi::where('is_active', 1)->get();
         $keahlian = Keahlian::where('id_divisi', $request->id_divisi)->where('is_active', 1)->get();
         $bio = "";
        

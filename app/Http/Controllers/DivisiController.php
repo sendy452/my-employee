@@ -47,11 +47,23 @@ class DivisiController extends Controller
     {
         $divisi = Divisi::find($iddivisi);
 
-        $divisi->delete();
+        $divisi->update([
+            'is_active' => 0
+        ]);
 
         return redirect()->back()->with("message", "Divisi berhasil dihapus!");
     }   
     
+    public function activateDivisi($iddivisi)
+    {
+        $divisi = Divisi::find($iddivisi);
+
+        $divisi->update([
+            'is_active' => 1
+        ]);
+
+        return redirect()->back()->with("message", "Divisi berhasil dihapus!");
+    }   
     public function changeDivisi(Request $request)
     {
         $data = $request->all();

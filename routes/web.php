@@ -76,6 +76,7 @@ Route::get('list-divisi', [DivisiController::class, 'listDivisi']);
 Route::post('add-divisi', [DivisiController::class, 'addDivisi'])->name('add.divisi'); 
 Route::put('change-divisi', [DivisiController::class, 'changeDivisi'])->name('change.divisi'); 
 Route::get('hapus-divisi/{iddivisi}', [DivisiController::class, 'deleteDivisi']);
+Route::get('activate-divisi/{iddivisi}', [DivisiController::class, 'activateDivisi']);
 
 //Manajemen Penilaian Kinerja
 Route::get('penilaian-kinerja', [ManajemenPenilaianController::class, 'penilaianKinerja']);

@@ -53,7 +53,7 @@ class KaryawanController extends Controller
     public function ubahKaryawan(Request $request)
     {
         $karyawan = User::get();
-        $divisi = Divisi::get();
+        $divisi = Divisi::where('is_active',1)->get();
         $bio = "";
 
         if ($request != "") {
