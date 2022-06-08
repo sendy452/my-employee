@@ -20,6 +20,7 @@ Route::group([
 
     Route::post('login', [UserApiController::class, 'login']);
     Route::put('update/{idkaryawan}',  [UserApiController::class, 'update']);
+    Route::put('password/{idkaryawan}',  [UserApiController::class, 'changePassword']);
     Route::post('logout', [UserApiController::class, 'logout']);
     Route::post('me', [UserApiController::class, 'me']);
     Route::post('refresh', [UserApiController::class, 'refreshToken']);
