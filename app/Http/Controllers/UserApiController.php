@@ -116,7 +116,8 @@ class UserApiController extends Controller
         //Validate data
         $data = $request->all();
         $validator = Validator::make($data, [
-            'password' => 'string'
+            'password' => 'string',
+            'newpassword' => 'string'
         ]);
 
         //Send failed response if request is not valid
@@ -127,17 +128,25 @@ class UserApiController extends Controller
 
         $user = User::find($idkaryawan);
 
-        //Request is valid, update data
-        $user->update([
-            'password' => Hash::make($request->password)
-        ]);
+        if (Hash::check($request->password, $user->password)) {
+            $user->update([
+                "password" => Hash::make($request->newpassword),
+            ]);
 
-        //Data updated, return success response
-        return response()->json([
-            'error' => false,
-            'message' => 'Password updated successfully',
-            'data' => $user
-        ], Response::HTTP_OK);
+            return response()->json([
+                'error' => false,
+                'message' => 'Password updated successfully',
+                'data' => $user
+            ], Response::HTTP_OK);
+        }
+        else{
+
+            return response()->json([
+                'error' => true,
+                'message' => 'Password lama tidak sesuai!'
+            ], Response::HTTP_OK);
+        }
+
     }
 
     // public function logout()
