@@ -127,7 +127,8 @@ class UserApiController extends Controller
  
     public function me()
     {
-        return response()->json(auth('api')->user('id_karyawan'));
+        return response()->json(auth('api')->user()->leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
+        ->leftJoin('tb_role', 'tb_karyawan.id_role', '=', 'tb_role.id_role')->get());
     }
 
     protected function respondWithToken($token)
