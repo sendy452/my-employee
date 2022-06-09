@@ -62,8 +62,8 @@
                       <td>{{$data->nama}}</td>
                       <td>{{$data->nama_divisi}}</td>
                       <td>{{$data->bidang}}</td>
-                      <td>{{$data->is_active == 1 ? 'Aktif' : 'Tidak Aktif'}}</td>
-                      <td><a style="width:110px" href="{{$data->is_active == 1 ? url('deactivate-user').'/'.$data->id_karyawan : url('activate-user').'/'.$data->id_karyawan}}" class="btn {{$data->is_active == 1 ? 'btn-danger' : 'btn-success'}}" type="button">{{$data->is_active == 1 ? 'Deaktivasi' : 'Aktivasi'}}</a></td>
+                      <td>{{$data->aktif == 1 ? 'Aktif' : 'Tidak Aktif'}}</td>
+                      <td><a style="width:110px" href="{{$data->aktif == 1 ? url('deactivate-user').'/'.$data->id_karyawan : url('activate-user').'/'.$data->id_karyawan}}" class="btn {{$data->aktif == 1 ? 'btn-danger' : 'btn-success'}}" type="button">{{$data->aktif == 1 ? 'Deaktivasi' : 'Aktivasi'}}</a></td>
                     </tr>
                     @endforeach
                   </tbody>
