@@ -136,7 +136,7 @@ class UserApiController extends Controller
         //Data updated, return success response
         return response()->json([
             'error' => false,
-            'message' => 'Data updated successfully',
+            'message' => 'Password updated successfully',
             'data' => $user
         ], Response::HTTP_OK);
     }
