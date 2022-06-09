@@ -27,6 +27,12 @@ class UserApiController extends Controller
 
             if(Hash::check($password,$data->password)){
                return response()->json(['error' => false, $data], 200);
+            } 
+            else{
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Password Salah'
+                ], 401);
             }
         }
         else{
@@ -35,7 +41,6 @@ class UserApiController extends Controller
                 'message' => 'Akun Tidak Ditemukan'
             ], 401);
         }
-
     }
  
     public function refreshToken()
