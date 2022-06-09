@@ -24,7 +24,7 @@ class UserApiController extends Controller
 
         if (! $token = auth('api')->attempt($credentials)) {
             return response()->json([
-                'status' => false,
+                'success' => false,
                 'message' => 'User Not Found'
             ], 401);
         }
@@ -36,7 +36,7 @@ class UserApiController extends Controller
     public function refreshToken()
     {
         return response()->json([
-            'status' => true,
+            'success' => true,
             'token' => auth('api')->refresh(),
             'type' => 'bearer',
             // 'user' => auth('api')->user(),
@@ -63,7 +63,7 @@ class UserApiController extends Controller
 
         //Send failed response if request is not valid
         if ($validator->fails()) {
-            return response()->json(['status' => false, 'message' => $validator->messages()], 200);
+            return response()->json(['success' => false, 'message' => $validator->messages()], 200);
         }
 
         $user = User::find($idkaryawan);
@@ -99,7 +99,7 @@ class UserApiController extends Controller
 
         //Send failed response if request is not valid
         if ($validator->fails()) {
-            return response()->json(['status' => false, 'message' => $validator->messages()], 200);
+            return response()->json(['success' => false, 'message' => $validator->messages()], 200);
         }
 
         $user = User::find($idkaryawan);
@@ -122,7 +122,7 @@ class UserApiController extends Controller
         auth('api')->logout();
 
 
-        return response()->json(['status' => true, 'message' => 'Successfully logged out']);
+        return response()->json(['success' => true, 'message' => 'Successfully logged out']);
     }
  
     public function me()
