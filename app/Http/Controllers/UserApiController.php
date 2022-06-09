@@ -24,9 +24,8 @@ class UserApiController extends Controller
 
         $data = User::leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')->where('email',$email)->where('tb_karyawan.is_active',1)->first();
         if($data){ 
-
             if(Hash::check($password,$data->password)){
-               return response()->json(['error' => false, $data], 200);
+               return response()->json(['error' => false, 'user' => $data], 200);
             } 
             else{
                 return response()->json([
@@ -42,20 +41,35 @@ class UserApiController extends Controller
             ], 401);
         }
     }
- 
-    public function refreshToken()
+
+    public function me($idkaryawan)
     {
-        return response()->json([
-            'error' => false,
-            'token' => auth('api')->refresh(),
-            'type' => 'bearer',
-            // 'user' => auth('api')->user(),
-            // 'authorisation' => [
-            //     'token' => auth('api')->refresh(),
-            //     'type' => 'bearer',
-            // ]
-        ]);
+        $data = User::leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')->where('id_karyawan',$idkaryawan)->where('tb_karyawan.is_active',1)->first();
+        if($data){ 
+            
+            return response()->json(['error' => false, 'user' => $data], 200);
+        }
+        else{
+            return response()->json([
+                'error' => true,
+                'message' => 'Akun Tidak Ditemukan'
+            ], 401);
+        }
     }
+ 
+    // public function refreshToken()
+    // {
+    //     return response()->json([
+    //         'error' => false,
+    //         'token' => auth('api')->refresh(),
+    //         'type' => 'bearer',
+    //         // 'user' => auth('api')->user(),
+    //         // 'authorisation' => [
+    //         //     'token' => auth('api')->refresh(),
+    //         //     'type' => 'bearer',
+    //         // ]
+    //     ]);
+    // }
 
     public function update(Request $request, $idkaryawan)
     {
@@ -127,26 +141,26 @@ class UserApiController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function logout()
-    {
-        auth('api')->logout();
+    // public function logout()
+    // {
+    //     auth('api')->logout();
 
 
-        return response()->json(['error' => false, 'message' => 'Successfully logged out']);
-    }
+    //     return response()->json(['error' => false, 'message' => 'Successfully logged out']);
+    // }
  
-    public function me()
-    {
-        return response()->json(auth('api')->user());
-    }
+    // public function me()
+    // {
+    //     return response()->json(auth('api')->user());
+    // }
 
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'error' => false,
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
-        ]);
-    }
+    // protected function respondWithToken($token)
+    // {
+    //     return response()->json([
+    //         'error' => false,
+    //         'access_token' => $token,
+    //         'token_type' => 'bearer',
+    //         'expires_in' => auth('api')->factory()->getTTL() * 60
+    //     ]);
+    // }
 }
