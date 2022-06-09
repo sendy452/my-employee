@@ -17,20 +17,25 @@ class UserApiController extends Controller
         $this->middleware('auth:api', ['except' => ['login']]);
     }
 
-    public function login()
+    public function login(Request $request)
     {
-        $credentials = request(['email', 'password']);
+        $email = $request->email;
+        $password = $request->password;
 
+        $data = User::leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')->where('email',$email)->where('tb_karyawan.is_active',1)->first();
+        if($data){ 
 
-        if (! $token = auth('api')->attempt($credentials)) {
+            if(Hash::check($password,$data->password)){
+               return response()->json(['error' => false, $data], 200);
+            }
+        }
+        else{
             return response()->json([
                 'error' => true,
-                'message' => 'User Not Found'
+                'message' => 'Akun Tidak Ditemukan'
             ], 401);
         }
 
-
-        return $this->respondWithToken($token);
     }
  
     public function refreshToken()
@@ -127,8 +132,7 @@ class UserApiController extends Controller
  
     public function me()
     {
-        return response()->json(auth('api')->user()->leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
-        ->leftJoin('tb_role', 'tb_karyawan.id_role', '=', 'tb_role.id_role')->find());
+        return response()->json(auth('api')->user());
     }
 
     protected function respondWithToken($token)
