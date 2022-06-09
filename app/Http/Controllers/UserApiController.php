@@ -31,14 +31,14 @@ class UserApiController extends Controller
                 return response()->json([
                     'error' => true,
                     'message' => 'Password Salah'
-                ], 401);
+                ]);
             }
         }
         else{
             return response()->json([
                 'error' => true,
                 'message' => 'Akun Tidak Ditemukan'
-            ], 401);
+            ]);
         }
     }
 
