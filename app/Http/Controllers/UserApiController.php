@@ -77,17 +77,16 @@ class UserApiController extends Controller
         $data = $request->all();
         $validator = Validator::make($data, [
             'nik' => 'unique:tb_karyawan,nik,'.$idkaryawan.',id_karyawan',
-            'nip' => 'unique:tb_karyawan,nip,'.$idkaryawan.',id_karyawan',
             'nohp' => 'unique:tb_karyawan,nohp,'.$idkaryawan.',id_karyawan'
         ],[
             'nik.unique' => 'NIK/KTP telah didaftarkan akun lain.',
-            'nip.unique' => 'NIP telah didaftarkan akun lain.',
             'nohp.unique' => 'No. Hp telah didaftarkan akun lain.',
         ]);
 
         //Send failed response if request is not valid
         if ($validator->fails()) {
-            return response()->json(['error' => true, 'message' => $validator->messages()], 200);
+            $errors = $validator->errors();
+            return response()->json(['error' => true, 'message' => $errors], 200);
         }
 
         $user = User::find($idkaryawan);
@@ -96,7 +95,6 @@ class UserApiController extends Controller
         $user->update([
             'nama' => $request->nama,
             'nik' => $request->nik,
-            'nip' => $request->nip,
             'nohp' => $request->nohp,
             'tlahir' => $request->tlahir,
             'tgllahir' => $request->tgllahir,
@@ -123,7 +121,8 @@ class UserApiController extends Controller
 
         //Send failed response if request is not valid
         if ($validator->fails()) {
-            return response()->json(['error' => true, 'message' => $validator->messages()], 200);
+            $errors = $validator->errors();
+            return response()->json(['error' => true, 'message' => $errors], 200);
         }
 
         $user = User::find($idkaryawan);
