@@ -121,8 +121,8 @@ class UserApiController extends Controller
 
         //Send failed response if request is not valid
         if ($validator->fails()) {
-            $errors = $validator->errors();
-            return response()->json(['error' => true, 'message' => $errors], 200);
+            $errors = $validator->errors()->all();
+            return response()->json(['error' => true, 'message' => $errors[0]], 200);
         }
 
         $user = User::find($idkaryawan);
