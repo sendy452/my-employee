@@ -24,7 +24,7 @@ class UserApiController extends Controller
 
         if (! $token = auth('api')->attempt($credentials)) {
             return response()->json([
-                'success' => false,
+                'error' => true,
                 'message' => 'User Not Found'
             ], 401);
         }
@@ -36,7 +36,7 @@ class UserApiController extends Controller
     public function refreshToken()
     {
         return response()->json([
-            'success' => true,
+            'error' => false,
             'token' => auth('api')->refresh(),
             'type' => 'bearer',
             // 'user' => auth('api')->user(),
@@ -63,7 +63,7 @@ class UserApiController extends Controller
 
         //Send failed response if request is not valid
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'message' => $validator->messages()], 200);
+            return response()->json(['error' => true, 'message' => $validator->messages()], 200);
         }
 
         $user = User::find($idkaryawan);
@@ -83,7 +83,7 @@ class UserApiController extends Controller
 
         //Data updated, return success response
         return response()->json([
-            'success' => true,
+            'error' => false,
             'message' => 'Data updated successfully',
             'data' => $user
         ], Response::HTTP_OK);
@@ -99,7 +99,7 @@ class UserApiController extends Controller
 
         //Send failed response if request is not valid
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'message' => $validator->messages()], 200);
+            return response()->json(['error' => true, 'message' => $validator->messages()], 200);
         }
 
         $user = User::find($idkaryawan);
@@ -111,7 +111,7 @@ class UserApiController extends Controller
 
         //Data updated, return success response
         return response()->json([
-            'success' => true,
+            'error' => false,
             'message' => 'Data updated successfully',
             'data' => $user
         ], Response::HTTP_OK);
@@ -122,7 +122,7 @@ class UserApiController extends Controller
         auth('api')->logout();
 
 
-        return response()->json(['success' => true, 'message' => 'Successfully logged out']);
+        return response()->json(['error' => false, 'message' => 'Successfully logged out']);
     }
  
     public function me()
@@ -133,7 +133,7 @@ class UserApiController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json([
-            'success' => true,
+            'error' => false,
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60
