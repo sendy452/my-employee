@@ -56,7 +56,7 @@
                   <label for="inputBobot" class="col-sm-2 col-form-label">Bobot</label>
                   <div class="col-sm-10">
                     <div class="input-group">
-                        <input type="number" class="form-control" name="bobot">
+                        <input type="number" class="form-control" name="bobot" min="0" max="100">
                         <span class="input-group-text"><i class="bi bi-percent"></i></span>
                     </div>
                   </div>
