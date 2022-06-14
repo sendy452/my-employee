@@ -243,8 +243,8 @@ class ManajemenPenilaianController extends Controller
 
         $data = $request->all();
         $validator = Validator::make($data, [
-            'id_form' => 'string|unique:tb_penilaian_keahlian,id_form,bulan,'.$request->bulan,
-            'id_form' => 'string|unique:tb_total_keahlian,id_form,bulan,'.$request->bulan,
+            'id_form' => 'string|unique:tb_penilaian_keahlian,id_form,'.$request->bulan.',bulan',
+            'id_form' => 'string|unique:tb_total_keahlian,id_form,'.$request->bulan.',bulan',
         ],[
             'id_form.unique' => 'Penilaian telah didaftarkan sebelumnya.'
         ]);
