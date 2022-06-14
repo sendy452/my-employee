@@ -115,7 +115,7 @@ class LaporanKeahlianController extends Controller
         $karyawan = User::where('is_active', 1)->get();
         $divisi = Divisi::get();
         $penilaiankeahlian = PenilaianKeahlian::leftJoin('tb_keahlian', 'tb_penilaian_keahlian.id_keahlian', '=', 'tb_keahlian.id_keahlian')
-        ->where('id_karyawan', $id_karyawan)->where('bulan', date('F-Y',strtotime($bulan)))->where('id_karyawan',$id_karyawan)->orderBy('tb_penilaian_keahlian.id_keahlian', 'asc')->get();
+        ->where('tb_penilaian_keahlian.id_divisi', $id_divisi)->where('id_karyawan', $id_karyawan)->where('bulan', date('F-Y',strtotime($bulan)))->where('id_karyawan',$id_karyawan)->orderBy('tb_penilaian_keahlian.id_keahlian', 'asc')->get();
         $totalkeahlian = TotalKeahlian::where('id_divisi', $id_divisi)->where('is_active', 1)->where('bulan', date('F-Y',strtotime($bulan)))->where('id_karyawan',$id_karyawan)->get();
         $totalkeahlianakhir = TotalKeahlian::where('id_divisi', $id_divisi)->where('is_active', 1)->where('bulan', date('F-Y',strtotime($bulan.'last month')))->where('id_karyawan',$id_karyawan)->get();
         $bio = User::leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
