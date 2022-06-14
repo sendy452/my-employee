@@ -116,8 +116,8 @@ class KaryawanController extends Controller
 
     public function deactivateKaryawan()
     {
-        $karyawan = User::select('tb_karyawan.is_active as aktif', 'tb_karyawan.*', 'tb_divisi.*', 'tb_role.*')->leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
-        ->leftJoin('tb_role', 'tb_karyawan.id_role', '=', 'tb_role.id_role')->orderBy('email','asc')->get();
+        $karyawan = User::select('tb_karyawan.is_active as aktif', 'tb_karyawan.*', 'tb_divisi.*')->leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
+        ->orderBy('email','asc')->get();
         
         return view('deactivate-karyawan', ['karyawan' => $karyawan]);
     }
