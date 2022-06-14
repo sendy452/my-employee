@@ -192,7 +192,7 @@ class PenilaianController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'keahlian' => 'string|unique:tb_keahlian,keahlian,'.$request->id_keahlian.',id_keahlian',
+            'keahlian' => 'string|unique:tb_keahlian,keahlian,'.$request->id_keahlian.',id_keahlian,id_divisi,'.$request->id_divisi,
         ],[
             'keahlian.unique' => 'Keahlian telah didaftarkan sebelumnya.',
         ]);
