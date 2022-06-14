@@ -76,8 +76,8 @@
                     <i class="bi bi-award"></i>
                   </div>
                   <div class="ps-2">
-                    <h6>{{$keahlian->keahlian}}</h6>
-                    <span class="text-muted small pt-2 ps-1">Dengan nilai</span> <span class="text-danger small pt-1 fw-bold">{{$keahlian->nilai}}%</span>
+                    <h6>{{$keahlian->keahlian ?? 'Belum dinilai'}}</h6>
+                    <span class="text-muted small pt-2 ps-1">Dengan nilai</span> <span class="text-danger small pt-1 fw-bold">{{$keahlian->nilai ?? '0'}}%</span>
                   </div>
                 </div>
 
