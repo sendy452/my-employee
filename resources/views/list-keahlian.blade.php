@@ -146,7 +146,7 @@
                       @csrf
                       @method("PUT")          
                       
-                      <th scope="row"><input type="text" class="form-control" name="id_keahlian" value="{{$data->id_keahlian}}" hidden>{{$no+1}}</th>
+                      <th scope="row"><input type="text" class="form-control" name="id_divisi" value="{{$data->id_divisi}}" hidden><input type="text" class="form-control" name="id_keahlian" value="{{$data->id_keahlian}}" hidden>{{$no+1}}</th>
                       <td><input style="width: auto;" type="text" class="form-control" name="keahlian" value="{{$data->keahlian}}"></td>
                       <td>{{$data->nama_divisi}} - {{$data->bidang}}</td>
                       <td><input style="width: auto;" type="number" class="form-control" name="bobot" value="{{$data->bobot}}"></td>
