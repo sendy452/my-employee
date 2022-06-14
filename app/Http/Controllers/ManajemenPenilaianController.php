@@ -324,7 +324,7 @@ class ManajemenPenilaianController extends Controller
 
     public function changePenilaianKeahlian(Request $request)
     {
-        $batas = PenilaianKeahlian::where('id_karyawan', $request->id_karyawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->count('id_keahlian');
+        $batas = PenilaianKeahlian::where('id_divisi', $request->id_divisi)->where('id_karyawan', $request->id_karyawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->count('id_keahlian');
 
         $data = $request->all();
         $validator = Validator::make($data, [
