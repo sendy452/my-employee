@@ -61,7 +61,7 @@ class KaryawanController extends Controller
 
     public function ubahKaryawan(Request $request)
     {
-        $karyawan = User::get();
+        $karyawan = User::orderBy('email','asc')->get();
         $divisi = Divisi::where('is_active',1)->get();
         $bio = "";
 

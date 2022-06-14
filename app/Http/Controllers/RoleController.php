@@ -51,7 +51,7 @@ class RoleController extends Controller
 
     public function ubahRoleUser(Request $request)
     {
-        $karyawan = User::get();
+        $karyawan = User::orderBy('email','asc')->get();
         $divisi = Divisi::get();
         $role = Role::get();
         $bio = "";

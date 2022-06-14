@@ -72,7 +72,7 @@ class LaporanKeahlianController extends Controller
 
     public function laporanKaryawan(Request $request)
     {
-        $karyawan = User::where('is_active', 1)->get();
+        $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
         $divisi = Divisi::get();
         $penilaiankeahlian = PenilaianKeahlian::leftJoin('tb_keahlian', 'tb_penilaian_keahlian.id_keahlian', '=', 'tb_keahlian.id_keahlian')
         ->where('id_karyawan', $request->idkaryawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->where('id_karyawan',$request->idkaryawan)->orderBy('tb_penilaian_keahlian.id_keahlian', 'asc')->get();

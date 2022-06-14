@@ -68,7 +68,7 @@ class LaporanKinerjaController extends Controller
 
     public function laporanKaryawan(Request $request)
     {
-        $karyawan = User::where('is_active', 1)->get();
+        $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
         $kategori = Kategori::get();
         $hitung = PenilaianKinerja::where('id_karyawan', $request->idkaryawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->where('is_active', 1)->where('id_kategori',1)->count('id_kinerja');
         $hitung2 = PenilaianKinerja::where('id_karyawan', $request->idkaryawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->where('is_active', 1)->where('id_kategori',2)->count('id_kinerja');

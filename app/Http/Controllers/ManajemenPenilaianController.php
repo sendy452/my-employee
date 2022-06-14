@@ -23,7 +23,7 @@ class ManajemenPenilaianController extends Controller
     
     public function penilaianKinerja(Request $request)
     {
-        $karyawan = User::where('is_active', 1)->get();
+        $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
         $kategori = Kategori::where('is_active', 1)->get();
         $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->count('kinerja');
         $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->count('kinerja');
@@ -112,7 +112,7 @@ class ManajemenPenilaianController extends Controller
 
     public function editPenilaianKinerja(Request $request)
     {
-        $karyawan = User::where('is_active', 1)->get();
+        $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
         $kategori = Kategori::get();
         $hitung = PenilaianKinerja::where('id_karyawan', $request->idkaryawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->where('is_active', 1)->where('id_kategori',1)->count('id_kinerja');
         $hitung2 = PenilaianKinerja::where('id_karyawan', $request->idkaryawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->where('is_active', 1)->where('id_kategori',2)->count('id_kinerja');
@@ -199,7 +199,7 @@ class ManajemenPenilaianController extends Controller
 
     public function penilaianKeahlian(Request $request)
     {
-        $karyawan = User::where('is_active', 1)->get();
+        $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
         $divisi = Divisi::where('is_active', 1)->get();
         $keahlian = Keahlian::where('id_divisi', $request->id_divisi)->where('is_active', 1)->get();
         $bio = "";
@@ -283,7 +283,7 @@ class ManajemenPenilaianController extends Controller
 
     public function editPenilaianKeahlian(Request $request)
     {
-        $karyawan = User::where('is_active', 1)->get();
+        $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
         $divisi = Divisi::get();
         $penilaiankeahlian = PenilaianKeahlian::leftJoin('tb_keahlian', 'tb_penilaian_keahlian.id_keahlian', '=', 'tb_keahlian.id_keahlian')
         ->where('id_karyawan', $request->idkaryawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->where('id_karyawan',$request->idkaryawan)->orderBy('tb_penilaian_keahlian.id_keahlian', 'asc')->get();
