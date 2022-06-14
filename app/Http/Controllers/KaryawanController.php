@@ -19,7 +19,7 @@ class KaryawanController extends Controller
     public function index()
     {
         $karyawan = User::select('tb_karyawan.created_at as dibuat', 'tb_karyawan.is_active as aktif', 'tb_karyawan.*', 'tb_divisi.*', 'tb_role.*')->leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
-        ->leftJoin('tb_role', 'tb_karyawan.id_role', '=', 'tb_role.id_role')->get();
+        ->leftJoin('tb_role', 'tb_karyawan.id_role', '=', 'tb_role.id_role')->orderBy('email','asc')->get();
 
         return view('list-karyawan', ['karyawan' => $karyawan]);
     }
