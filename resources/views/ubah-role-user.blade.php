@@ -38,12 +38,12 @@
                 @method("GET")
 
                 <div class="row mb-3">
-                    <label for="Jenis Kelamin" class="col-md-4 col-lg-3 col-form-label">Email User</label>
+                    <label for="Jenis Kelamin" class="col-md-4 col-lg-3 col-form-label">Nama User</label>
                     <div class="col-md-8 col-lg-9">
                         <select onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' class="form-select" name="idkaryawan">
-                            <option><h1>Pilih Email!</h1></option>
+                            <option><h1>-----Pilih Karyawan-----</h1></option>
                             @foreach($karyawan as $data)
-                            <option value="{{$data->id_karyawan}}">{{$data->email}}</option>
+                            <option value="{{$data->id_karyawan}}">{{$data->nama}}</option>
                             @endforeach
                         </select>
                     </div>
