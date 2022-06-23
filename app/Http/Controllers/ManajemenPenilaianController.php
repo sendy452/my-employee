@@ -52,9 +52,9 @@ class ManajemenPenilaianController extends Controller
         }
 
         if($request->idkaryawan != ""){
-            (int)$divisi =  DB::table('tb_karyawan')->select("id_divisi")->where("id_karyawan", $request->idkaryawan)->get();
+            $divisi =  DB::table('tb_karyawan')->select("id_divisi")->where("id_karyawan", $request->idkaryawan)->get();
         }
-        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divsi', $divisi)->count('kinerja');
+        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divsi', (int)$divisi)->count('kinerja');
         $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->count('kinerja');
         $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->get();
         $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->get();
