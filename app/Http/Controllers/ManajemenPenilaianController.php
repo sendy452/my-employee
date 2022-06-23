@@ -50,7 +50,7 @@ class ManajemenPenilaianController extends Controller
             $totalkinerjaakhir = TotalKinerja::where('is_active', 1)->where('bulan', date('F-Y',strtotime($request->bulan.'last month')))->where('id_karyawan',$request->idkaryawan)->get();
         }
 
-        if($request->idkaryawan != 0){
+        if($request->idkaryawan != null){
             $divisi = User::select("id_divisi")->where("id_karyawan", $request->idkaryawan)->get();
         }else{
             $divisi = 0;
