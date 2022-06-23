@@ -50,7 +50,7 @@ class ManajemenPenilaianController extends Controller
             $totalkinerjaakhir = TotalKinerja::where('is_active', 1)->where('bulan', date('F-Y',strtotime($request->bulan.'last month')))->where('id_karyawan',$request->idkaryawan)->get();
         }
 
-        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divsi', $bio['id_divisi'])->count('kinerja');
+        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divsi', $bio[0]->id_divisi)->count('kinerja');
         $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $bio)->count('kinerja');
         $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $bio)->get();
         $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $bio)->get();
