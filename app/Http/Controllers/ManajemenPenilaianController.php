@@ -47,14 +47,14 @@ class ManajemenPenilaianController extends Controller
             $bio = User::leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
             ->leftJoin('tb_role', 'tb_karyawan.id_role', '=', 'tb_role.id_role')->where('id_karyawan',$request->idkaryawan)->get();
 
-            $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $bio->id_divisi)->count('kinerja');
-        $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $bio->id_divisi)->count('kinerja');
-        $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $bio->id_divisi)->get();
-        $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $bio->id_divisi)->get();
-        $kinerja2 = Kinerja::where('is_active', 1)->where('id_kategori',3)->where('id_divisi', $bio->id_divisi)->get();
-        
             $totalkinerjaakhir = TotalKinerja::where('is_active', 1)->where('bulan', date('F-Y',strtotime($request->bulan.'last month')))->where('id_karyawan',$request->idkaryawan)->get();
         }
+
+        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $bio)->count('kinerja');
+        $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $bio)->count('kinerja');
+        $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $bio)->get();
+        $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $bio)->get();
+        $kinerja2 = Kinerja::where('is_active', 1)->where('id_kategori',3)->where('id_divisi', $bio)->get();
 
         $check = TotalKinerja::where('bulan', date('F-Y',strtotime($request->bulan)))->where('id_karyawan', $request->idkaryawan)->count('bulan');
         if ($check != 0) {
