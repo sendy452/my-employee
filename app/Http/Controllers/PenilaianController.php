@@ -156,7 +156,7 @@ class PenilaianController extends Controller
             return redirect()->back()->withErrors($errors);
         }
 
-        return view('list-keahlian', ['keahlian' => $keahlian, 'divisi' => $divisi]);
+        return view('list-keahlian', ['keahlian' => $keahlian, 'divisi' => $divisi, $check]);
     }
 
     public function addKeahlian(Request $request)
