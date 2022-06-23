@@ -156,7 +156,7 @@
                           <td><input onblur="findTotal1()" type="number" class="bobot1" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
                           <td><input onblur="findTotal1()" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai1" required/><br></td>
                           <td>{{$data->target}}.00</td>
-                          <td><input onblur="findTotal1()" type="number" step="0.01" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai1{{$i}}" value="0"/></td>
+                          <td><input onblur="findTotal1()" type="number" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai1{{$i}}" value="0"/></td>
                       </tr>
                       <?php $total_bobot1 += $data->bobot;?>
                       <?php $no++;?>
@@ -187,7 +187,7 @@
                           <td><input onblur="findTotal2()" type="number" class="bobot2" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
                           <td><input onblur="findTotal2()" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai2" required/><br></td>
                           <td>{{$data->target}}.00</td>
-                          <td><input onblur="findTotal2()" type="number" step="0.01" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai2{{$i}}" value="0"/></td>
+                          <td><input onblur="findTotal2()" type="number" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai2{{$i}}" value="0"/></td>
                       </tr>
                       <?php $total_bobot2 += $data->bobot;?>
                       <?php $no++;?>
@@ -218,7 +218,7 @@
                         <td><input onblur="findTotal3()" type="number" class="bobot3" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
                         <td><input onblur="findTotal3()" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai3" required/><br></td>
                         <td>{{$data->target}}.00</td>
-                        <td><input onblur="findTotal3()" type="number" step="0.01" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai3{{$i}}" value="0"/></td>
+                        <td><input onblur="findTotal3()" type="number" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai3{{$i}}" value="0"/></td>
                       </tr>
                       <?php $total_bobot3 += $data->bobot;?>
                       <?php $no++;?>
@@ -236,9 +236,8 @@
                       <tr>
                         <th colspan="5">Total Score</th>
                         <td>{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</td>
-                        <td>100</td>
-                        <td>-</td>
-                        <th><input type="number" step="0.01" name="total_score" id="total"/>/{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</th>
+                        <td colspan="2">-</td>
+                        <th><input style="width:50%" type="number" step="0.01" name="total_score" id="total"/>/{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</th>
                       </tr>
 
                       <tr><td colspan="9"></td></tr>
