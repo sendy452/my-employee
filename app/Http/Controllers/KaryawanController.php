@@ -45,6 +45,7 @@ class KaryawanController extends Controller
 
         User::create([
             'nip' => $request->nip,
+            'nama' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);

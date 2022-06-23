@@ -41,7 +41,7 @@
                     <label for="Jenis Kelamin" class="col-md-4 col-lg-3 col-form-label">Nama Karyawan</label>
                     <div class="col-md-8 col-lg-9">
                         <select onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' class="form-select" name="idkaryawan">
-                            <option><h1>Pilih Nama!</h1></option>
+                            <option><h1>-----Pilih Karyawan-----</h1></option>
                             @foreach($karyawan as $data)
                             <option value="{{$data->id_karyawan}}">{{$data->nama}}</option>
                             @endforeach
