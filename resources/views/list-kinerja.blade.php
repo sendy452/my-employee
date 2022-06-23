@@ -151,7 +151,7 @@
                   <div class="row mb-3">
                     <label for="inputKategori" class="col-sm-2 col-form-label">Target</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" name="target" placeholder="1 - 4" min="1" max="4">
+                        <input type="number" class="form-control" name="target" placeholder="100" min="1" max="100">
                     </div>
                 </div>
                   

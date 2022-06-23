@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputtDivisi" class="col-md-4 col-lg-3 col-form-label">Pilih Divisi Tujuan</label>
+                  <label for="inputtDivisi" class="col-md-4 col-lg-3 col-form-label">Pilih Jabatan Tujuan</label>
                   <div class="col-md-8 col-lg-9">
                   <select onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' class="form-select" name="id_divisi">
                       @foreach($divisi as $data)

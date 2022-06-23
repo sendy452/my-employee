@@ -84,7 +84,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">List Penilaian Keahlian Tiap Divisi</h5>
+              <h5 class="card-title">List Penilaian Keahlian Tiap Jabatan</h5>
 
               <!-- General Form Elements -->
               <form method="post" action="{{ url('list-keahlian') }}">
@@ -92,7 +92,7 @@
                 @method("GET")
 
                 <div class="row mb-3">
-                  <label for="inputtDivisi" class="col-sm-2 col-form-label">Pilih Divisi</label>
+                  <label for="inputtDivisi" class="col-sm-2 col-form-label">Pilih Jabatan</label>
                   <div class="col-sm-10">
                   <select class="form-select" name="id_divisi">
                       @foreach($divisi as $data)
@@ -133,7 +133,7 @@
                     <tr>
                       <th scope="col">No.</th>
                       <th scope="col">Nama Keahlian</th>
-                      <th scope="col">Divisi</th>
+                      <th scope="col">Jabatan</th>
                       <th scope="col">Bobot (%)</th>
                       <th scope="col">Aksi</th>
                     </tr>
