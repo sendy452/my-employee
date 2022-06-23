@@ -51,7 +51,7 @@ class ManajemenPenilaianController extends Controller
         }
 
         if($request->idkaryawan != null){
-            $divisi = User::select("id_divisi")->where("id_karyawan", $request->idkaryawan)->get();
+            $divisi = User::select("id_divisi")->where("id_karywan", $request->idkaryawan)->get();
         }else{
             $divisi = 0;
         }
