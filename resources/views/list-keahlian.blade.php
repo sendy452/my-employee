@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputtDivisi" class="col-sm-2 col-form-label">Divisi Yang Membutuhkan</label>
+                  <label for="inputtDivisi" class="col-sm-2 col-form-label">Penilaian Untuk Jabatan</label>
                   <div class="col-sm-10">
                   <select class="form-select" name="id_divisi">
                       @foreach($divisi as $data)
