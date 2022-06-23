@@ -185,7 +185,7 @@
                       <tr>
                           <td colspan="5"><input value="{{$kategori[1]->id_kategori}}" name="id_kategori[{{$no+1}}]" hidden><input value="{{$data->id_kinerja}}" name="id_kinerja[{{$no+1}}]" hidden>{{$data->kinerja}}</td>
                           <td><input onblur="findTotal2()" type="number" class="bobot2" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
-                          <td><input onblur="findTotal2()" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai2" required/><br></td>
+                          <td><input style="width:100%" onblur="findTotal2()" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai2" required/><br></td>
                           <td>{{$data->target}}.00</td>
                           <td><input onblur="findTotal2()" type="number" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai2{{$i}}" value="0"/></td>
                       </tr>
@@ -216,7 +216,7 @@
                       <tr>
                         <td colspan="5"><input value="{{$kategori[2]->id_kategori}}" name="id_kategori[{{$no+1}}]" hidden><input value="{{$data->id_kinerja}}" name="id_kinerja[{{$no+1}}]" hidden>{{$data->kinerja}}</td>
                         <td><input onblur="findTotal3()" type="number" class="bobot3" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
-                        <td><input onblur="findTotal3()" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai3" required/><br></td>
+                        <td><input style="width:100%" onblur="findTotal3()" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai3" required/><br></td>
                         <td>{{$data->target}}.00</td>
                         <td><input onblur="findTotal3()" type="number" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai3{{$i}}" value="0"/></td>
                       </tr>
@@ -237,7 +237,7 @@
                         <th colspan="5">Total Score</th>
                         <td>{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</td>
                         <td colspan="2">-</td>
-                        <th><input style="width:80%" type="number" step="0.01" name="total_score" id="total"/> /{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</th>
+                        <th><input style="width:60%" type="number" step="0.01" name="total_score" id="total"/> /{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</th>
                       </tr>
 
                       <tr><td colspan="9"></td></tr>
