@@ -140,7 +140,7 @@
                         <th>Penilaian Bidang</th>
                         <td>@foreach($divisi as $dv){{$dv->id_divisi == $id_dv ? $dv->bidang : ""}}@endforeach</td>
                         <td>Buruk</td>
-                        <td>0 - 25%</td>
+                        <td>1 - 25%</td>
                       </tr>
 
                       <tr><td colspan="9"></td></tr>
@@ -158,7 +158,7 @@
                       <tr>
                           <td colspan="5"><input value="{{$penilaiankeahlian[$no]->id_keahlian == $data->id_keahlian ? $penilaiankeahlian[$no]->id_penilaian_keahlian : "0"}}" name="id_penilaian_keahlian[{{$no+1}}]" hidden><input type="text" class="form-control" name="id_divisi" value="{{$data->id_divisi}}" hidden><input value="{{$data->id_keahlian}}" name="id_keahlian[{{$no+1}}]" hidden>{{$data->keahlian}}</td>
                           <td colspan="2"><input onblur="findTotal()" type="number" class="bobot" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
-                          <td><input onblur="findTotal()" value="{{$data->nilai}}" type="number" min="0" max="100" name="nilai[{{$no+1}}]" class="nilai" required/><br></td>
+                          <td><input onblur="findTotal()" value="{{$data->nilai}}" type="number" min="1" max="100" name="nilai[{{$no+1}}]" class="nilai" required/><br></td>
                           <td><input onblur="findTotal()" type="number" step="0.01" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai{{$i}}" value="{{$data->bobot_nilai}}"/></td>
                       </tr>
                       <?php $total_bobot += $data->bobot ?>

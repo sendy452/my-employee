@@ -99,7 +99,7 @@
                         <th>Nilai Bulan Lalu</th>
                         <td>@foreach($totalkinerjaakhir as $tk) {{$tk->total}} @endforeach</td>
                         <td>Sangat Baik</td>
-                        <td>4</td>
+                        <td>76-100</td>
                       </tr>
 
                       <tr>
@@ -111,7 +111,7 @@
                         <td><input type="number" value="{{$tk->total}}" step="0.01" id="total_score" disabled/></td>
                         @endforeach
                         <td>Baik</td>
-                        <td>3</td>
+                        <td>51-75</td>
                       </tr>
 
                       <tr>
@@ -120,7 +120,7 @@
                         <th></th>
                         <td></td>
                         <td>Sedang</td>
-                        <td>2</td>
+                        <td>26-50</td>
                       </tr>
 
                       <tr>
@@ -130,7 +130,7 @@
                         <th></th>
                         <td></td>
                         <td>Buruk</td>
-                        <td>1</td>
+                        <td>1-25</td>
                       </tr>
 
                       <tr><td colspan="9"></td></tr>
@@ -157,8 +157,8 @@
                       @foreach($kinerja0 as $i => $data)
                       <tr>
                           <td colspan="5"><input value="{{$data->id_penilaian_kinerja}}" name="id_penilaian_kinerja[{{$no+1}}]" hidden><input value="{{$data->id_kinerja}}" name="id_kinerja[{{$no+1}}]" hidden>{{$data->kinerja}}</td>
-                          <td><input onblur="findTotal1()" type="number" step="0.01" class="bobot1" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
-                          <td><input onblur="findTotal1()" value="{{$data->nilai}}" type="number" step="0.01" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai1" required/><br></td>
+                          <td><input onblur="findTotal1()" type="number" class="bobot1" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
+                          <td><input onblur="findTotal1()" value="{{$data->nilai}}" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai1" required/><br></td>
                           <td>{{$data->target}}.00</td>
                           <td><input onblur="findTotal1()" type="number" step="0.01" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai1{{$i}}" value="{{$data->bobot_nilai}}"/></td>
                       </tr>
@@ -190,8 +190,8 @@
                       @foreach($kinerja1 as $i => $data)
                       <tr>
                           <td colspan="5"><input value="{{$data->id_penilaian_kinerja}}" name="id_penilaian_kinerja[{{$no+1}}]" hidden><input value="{{$data->id_kinerja}}" name="id_kinerja[{{$no+1}}]" hidden>{{$data->kinerja}}</td>
-                          <td><input onblur="findTotal2()" type="number" step="0.01" class="bobot2" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
-                          <td><input onblur="findTotal2()" value="{{$data->nilai}}" type="number" step="0.01" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai2" required/><br></td>
+                          <td><input onblur="findTotal2()" type="number" class="bobot2" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
+                          <td><input onblur="findTotal2()" value="{{$data->nilai}}" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai2" required/><br></td>
                           <td>{{$data->target}}.00</td>
                           <td><input onblur="findTotal2()" type="number" step="0.01" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai2{{$i}}" value="{{$data->bobot_nilai}}"/></td>
                       </tr>
@@ -223,8 +223,8 @@
                       @foreach($kinerja2 as $i => $data)
                       <tr>
                         <td colspan="5"><input value="{{$data->id_penilaian_kinerja}}" name="id_penilaian_kinerja[{{$no+1}}]" hidden><input value="{{$data->id_kinerja}}" name="id_kinerja[{{$no+1}}]" hidden>{{$data->kinerja}}</td>
-                        <td><input onblur="findTotal3()" type="number" step="0.01" class="bobot3" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
-                        <td><input onblur="findTotal3()" value="{{$data->nilai}}" type="number" step="0.01" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai3" required/><br></td>
+                        <td><input onblur="findTotal3()" type="number" class="bobot3" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
+                        <td><input onblur="findTotal3()" value="{{$data->nilai}}" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai3" required/><br></td>
                         <td>{{$data->target}}.00</td>
                         <td><input onblur="findTotal3()" type="number" step="0.01" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai3{{$i}}" value="{{$data->bobot_nilai}}"/></td>
                       </tr>
