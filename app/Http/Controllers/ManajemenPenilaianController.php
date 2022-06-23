@@ -25,11 +25,11 @@ class ManajemenPenilaianController extends Controller
     {
         $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
         $kategori = Kategori::where('is_active', 1)->get();
-        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->count('kinerja');
-        $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->count('kinerja');
-        $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->get();
-        $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->get();
-        $kinerja2 = Kinerja::where('is_active', 1)->where('id_kategori',3)->get();
+        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $request->iddivisi)->count('kinerja');
+        $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $request->iddivisi)->count('kinerja');
+        $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $request->iddivisi)->get();
+        $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $request->iddivisi)->get();
+        $kinerja2 = Kinerja::where('is_active', 1)->where('id_kategori',3)->where('id_divisi', $request->iddivisi)->get();
         $bio = "";
        
         if ($request != "") {
