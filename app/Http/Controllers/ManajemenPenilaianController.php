@@ -30,8 +30,6 @@ class ManajemenPenilaianController extends Controller
        
         if ($request != "") {
 
-            $divisi = User::select("id_divisi")->where("id_karyawan", $request->idkaryawan)->get();
-
             $data = $request->all();
             $validator = Validator::make($data, [
                 'idkaryawan' => 'numeric',
@@ -53,6 +51,7 @@ class ManajemenPenilaianController extends Controller
             $totalkinerjaakhir = TotalKinerja::where('is_active', 1)->where('bulan', date('F-Y',strtotime($request->bulan.'last month')))->where('id_karyawan',$request->idkaryawan)->get();
         }
 
+        $divisi = User::select("id_divisi")->where("id_karyawan", $request->idkaryawan)->get();
         $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->count('kinerja');
         $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->count('kinerja');
         $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->get();
