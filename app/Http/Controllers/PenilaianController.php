@@ -151,12 +151,12 @@ class PenilaianController extends Controller
         $divisi = Divisi::orderBy('nama_divisi','asc')->get();
        
         $check = Keahlian::leftJoin('tb_divisi', 'tb_keahlian.id_divisi', '=', 'tb_divisi.id_divisi')->where('tb_keahlian.is_active',1)->where('tb_keahlian.id_divisi', $request->id_divisi)->count('keahlian');
-        if ($check = 0) {
+        if ($check == 0) {
             $errors = 'List penilaian belum dibuat.';
             return redirect()->back()->withErrors($errors);
         }
 
-        return view('list-keahlian', ['keahlian' => $keahlian, 'divisi' => $divisi, $check]);
+        return view('list-keahlian', ['keahlian' => $keahlian, 'divisi' => $divisi]);
     }
 
     public function addKeahlian(Request $request)
