@@ -31,11 +31,6 @@ class ManajemenPenilaianController extends Controller
         if ($request != "") {
 
             $divisi = User::select("id_divisi")->where("id_karyawan", $request->idkaryawan)->get();
-            $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->count('kinerja');
-            $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->count('kinerja');
-            $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->get();
-            $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->get();
-            $kinerja2 = Kinerja::where('is_active', 1)->where('id_kategori',3)->where('id_divisi', $divisi)->get();
 
             $data = $request->all();
             $validator = Validator::make($data, [
@@ -57,6 +52,12 @@ class ManajemenPenilaianController extends Controller
 
             $totalkinerjaakhir = TotalKinerja::where('is_active', 1)->where('bulan', date('F-Y',strtotime($request->bulan.'last month')))->where('id_karyawan',$request->idkaryawan)->get();
         }
+
+        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->count('kinerja');
+        $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->count('kinerja');
+        $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->get();
+        $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->get();
+        $kinerja2 = Kinerja::where('is_active', 1)->where('id_kategori',3)->where('id_divisi', $divisi)->get();
 
         $check = TotalKinerja::where('bulan', date('F-Y',strtotime($request->bulan)))->where('id_karyawan', $request->idkaryawan)->count('bulan');
         if ($check != 0) {
