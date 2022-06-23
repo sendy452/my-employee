@@ -236,8 +236,9 @@
                       <tr>
                         <th colspan="5">Total Score</th>
                         <td>{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</td>
-                        <td colspan="2">4.00</td>
-                        <th><input type="number" step="0.01" name="total_score" id="total"/></th>
+                        <td>100</td>
+                        <td>-</td>
+                        <th><input type="number" step="0.01" name="total_score" id="total"/>/{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</th>
                       </tr>
 
                       <tr><td colspan="9"></td></tr>
