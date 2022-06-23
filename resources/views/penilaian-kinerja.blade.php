@@ -43,7 +43,7 @@
                         <select onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' class="form-select" name="idkaryawan">
                             <option><h1>-----Pilih Karyawan-----</h1></option>
                             @foreach($karyawan as $data)
-                            <option value="{{$data->id_karyawan}}"><input type="text" name="iddivisi" value="{{$data->id_divisi}}" hidden>{{$data->nama}}</option>
+                            <option value="{{$data->id_karyawan}}">{{$data->nama}}</option>
                             @endforeach
                         </select>
                     </div>
