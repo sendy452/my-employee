@@ -25,16 +25,17 @@ class ManajemenPenilaianController extends Controller
     {
         $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
         $kategori = Kategori::where('is_active', 1)->get();
-        $divisi = User::select("id_divisi")->where("id_karyawan", $request->idkaryawan)->get();
-        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->count('kinerja');
-        $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->count('kinerja');
-        $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->get();
-        $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->get();
-        $kinerja2 = Kinerja::where('is_active', 1)->where('id_kategori',3)->where('id_divisi', $divisi)->get();
         $bio = "";
        
         if ($request != "") {
 
+            $divisi = User::select("id_divisi")->where("id_karyawan", $request->idkaryawan)->get();
+            $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->count('kinerja');
+            $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->count('kinerja');
+            $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->get();
+            $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->get();
+            $kinerja2 = Kinerja::where('is_active', 1)->where('id_kategori',3)->where('id_divisi', $divisi)->get();
+            
             $data = $request->all();
             $validator = Validator::make($data, [
                 'idkaryawan' => 'numeric',
