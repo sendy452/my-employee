@@ -13,6 +13,7 @@ use App\Models\PenilaianKeahlian;
 use App\Models\TotalKinerja;
 use App\Models\TotalKeahlian;
 use Illuminate\Support\Facades\Validator;
+Use DB;
 
 class ManajemenPenilaianController extends Controller
 {
@@ -21,7 +22,7 @@ class ManajemenPenilaianController extends Controller
         $this->middleware('auth:web');
     }
     
-    public function penilaianKinerja(Request $request, $divisi = 0)
+    public function penilaianKinerja(Request $request, $divisi = "")
     {
         $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
         $kategori = Kategori::where('is_active', 1)->get();
@@ -51,13 +52,18 @@ class ManajemenPenilaianController extends Controller
         }
 
         if($request->idkaryawan != ""){
-            $divisi =  User::select("id_divisi")->where("id_karyawan", $request->idkaryawan)->first();
+            $divisi =  DB::table('tb_karyawan')->select("id_divisi")->where("id_karyawan", $request->idkaryawan)->first()->id_divisi;
         }
-        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divsi', $divisi)->count('kinerja');
+        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->count('kinerja');
         $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->count('kinerja');
         $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->get();
         $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->get();
         $kinerja2 = Kinerja::where('is_active', 1)->where('id_kategori',3)->where('id_divisi', $divisi)->get();
+
+        if ($divisi != "" && $hitung == 0) {
+            $errors = 'List penilaian belum dibuat.';
+            return redirect()->back()->withErrors($errors);
+        }
 
         $check = TotalKinerja::where('bulan', date('F-Y',strtotime($request->bulan)))->where('id_karyawan', $request->idkaryawan)->count('bulan');
         if ($check != 0) {
