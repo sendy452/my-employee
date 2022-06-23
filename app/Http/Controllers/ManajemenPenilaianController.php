@@ -21,7 +21,7 @@ class ManajemenPenilaianController extends Controller
         $this->middleware('auth:web');
     }
     
-    public function penilaianKinerja(Request $request, $divisi = 0)
+    public function penilaianKinerja(Request $request)
     {
         $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
         $kategori = Kategori::where('is_active', 1)->get();
@@ -50,14 +50,11 @@ class ManajemenPenilaianController extends Controller
             $totalkinerjaakhir = TotalKinerja::where('is_active', 1)->where('bulan', date('F-Y',strtotime($request->bulan.'last month')))->where('id_karyawan',$request->idkaryawan)->get();
         }
 
-        if($request->idkaryawan != ""){
-            $divisi =  User::select("id_divisi")->where("id_karyawan", $request->idkaryawan)->get();
-        }
-        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divsi', $divisi)->count('kinerja');
-        $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->count('kinerja');
-        $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->get();
-        $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->get();
-        $kinerja2 = Kinerja::where('is_active', 1)->where('id_kategori',3)->where('id_divisi', $divisi)->get();
+        $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divsi', $bio->id_divisi)->count('kinerja');
+        $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $bio->id_divisi)->count('kinerja');
+        $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $bio->id_divisi)->get();
+        $kinerja1 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $bio->id_divisi)->get();
+        $kinerja2 = Kinerja::where('is_active', 1)->where('id_kategori',3)->where('id_divisi', $bio->id_divisi)->get();
 
         $check = TotalKinerja::where('bulan', date('F-Y',strtotime($request->bulan)))->where('id_karyawan', $request->idkaryawan)->count('bulan');
         if ($check != 0) {
