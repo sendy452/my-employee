@@ -21,7 +21,7 @@ class ManajemenPenilaianController extends Controller
         $this->middleware('auth:web');
     }
     
-    public function penilaianKinerja(Request $request)
+    public function penilaianKinerja(Request $request, $divisi = 0)
     {
         $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
         $kategori = Kategori::where('is_active', 1)->get();
@@ -50,11 +50,8 @@ class ManajemenPenilaianController extends Controller
             $totalkinerjaakhir = TotalKinerja::where('is_active', 1)->where('bulan', date('F-Y',strtotime($request->bulan.'last month')))->where('id_karyawan',$request->idkaryawan)->get();
         }
 
-        if($request->idkaryawan == null){
-            $divisi = 0;
-        }else{
-            $divisi =  User::select("id_divisi")->where("id_karyawan", $request->idkaryawan)->get();
-        }
+       
+        $divisi =  User::select("id_divisi")->where("id_karyawan", $request->idkaryawan)->get();
         $hitung = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->count('kinerja');
         $hitung2 = Kinerja::where('is_active', 1)->where('id_kategori',2)->where('id_divisi', $divisi)->count('kinerja');
         $kinerja0 = Kinerja::where('is_active', 1)->where('id_kategori',1)->where('id_divisi', $divisi)->get();
