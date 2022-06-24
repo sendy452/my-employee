@@ -27,7 +27,7 @@ class DashboardController extends Controller
                 $datas[] = User::where(\DB::raw("MONTHNAME(created_at)"),$value)->where(\DB::raw('YEAR(created_at)'), date('Y'))->count();
             }
 
-            $keahlian = PenilaianKeahlian::leftJoin('tb_keahlian', 'tb_penilaian_keahlian.id_keahlian', '=', 'tb_keahlian.id_keahlian')->where('id_karyawan', $terbaik->id_karyawan)->where('bulan', date('F-Y', strtotime('last month')))->orderBy('nilai', 'desc')->first();
+            $keahlian = PenilaianKeahlian::leftJoin('tb_keahlian', 'tb_penilaian_keahlian.id_keahlian', '=', 'tb_keahlian.id_keahlian')->where('id_karyawan', $terbaik->id_karyawan ?? 0)->where('bulan', date('F-Y', strtotime('last month')))->orderBy('nilai', 'desc')->first();
 
             return view('home',['karyawan' => $karyawan, 'c_karyawan' => $c_karyawan, 'terbaik' => $terbaik, 'terendah' => $terendah, 'keahlian' => $keahlian])->with('labels', $labels)->with('datas', $datas);
         }
