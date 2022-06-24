@@ -140,6 +140,16 @@
                     </div>
                   </div>
                   <div class="row mb-3">
+                    <label for="inputtDivisi" class="col-sm-2 col-form-label">Penilaian Jabatan</label>
+                    <div class="col-sm-10">
+                    <select class="form-select" name="id_divisi">
+                        @foreach($divisi as $data)
+                        <option value="{{$data->id_divisi}}">{{$data->nama_divisi.' - '.$data->bidang}}</option>
+                        @endforeach
+                    </select>     
+                    </div>
+                  </div>
+                  <div class="row mb-3">
                     <label for="inputBobot" class="col-sm-2 col-form-label">Bobot</label>
                     <div class="col-sm-10">
                       <div class="input-group">
@@ -171,6 +181,45 @@
         </div>
       </section>
       <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">List Penilaian Kinerja Tiap Jabatan</h5>
+  
+                <!-- General Form Elements -->
+                <form method="post" action="{{ url('list-kinerja') }}">
+                  @csrf
+                  @method("GET")
+  
+                  <div class="row mb-3">
+                    <label for="inputtDivisi" class="col-sm-2 col-form-label">Pilih Jabatan</label>
+                    <div class="col-sm-10">
+                    <select class="form-select" name="id_divisi">
+                        @foreach($divisi as $data)
+                        <option value="{{$data->id_divisi}}">{{$data->nama_divisi}} - {{$data->bidang}}</option>
+                        @endforeach
+                    </select>     
+                    </div>
+                  </div>
+                  
+                  <div class="row mb-3 text-end">
+                    <div class="col-sm-12">
+                      <button type="submit" class="btn btn-primary">Tampilkan Kinerja</button>
+                    </div>
+                  </div>
+  
+                </form>
+                <!-- End General Form Elements -->
+  
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+      <section class="section">
           <div class="row">
             <div class="col-lg-12">
     
@@ -186,6 +235,7 @@
                         <th scope="col">No.</th>
                         <th scope="col">Penilaian Kinerja</th>
                         <th scope="col">Kategori</th>
+                        <th scope="col">Penilaian Jabatan</th>
                         <th scope="col">Bobot (%)</th>
                         <th scope="col">Target</th>
                         <th scope="col">Aksi</th>
@@ -208,7 +258,8 @@
                                 @endforeach
                             </select>  
                         </td>
-                        <td><input style="width: auto;" type="number" class="form-control" name="bobot" value="{{$kinerja->bobot}}"></td>
+                        <td>{{$kinerja->nama_divisi.' - '.$kinerja->bidang}}</td>
+                        <td><input type="number" class="form-control" name="bobot" value="{{$kinerja->bobot}}"></td>
                         <td><input type="number" class="form-control" name="target" value="{{$kinerja->target}}"></td>
                         <td><button type="submit" class="btn btn-success">Ubah</button> <a href="{{url('hapus-kinerja').'/'.$kinerja->id_kinerja}}" class="btn btn-danger" type="button">Hapus</a></td>
                         

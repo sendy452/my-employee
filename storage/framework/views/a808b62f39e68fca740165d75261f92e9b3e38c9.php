@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputtDivisi" class="col-sm-2 col-form-label">Divisi Yang Membutuhkan</label>
+                  <label for="inputtDivisi" class="col-sm-2 col-form-label">Penilaian Untuk Jabatan</label>
                   <div class="col-sm-10">
                   <select class="form-select" name="id_divisi">
                       <?php $__currentLoopData = $divisi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -56,7 +56,7 @@
                   <label for="inputBobot" class="col-sm-2 col-form-label">Bobot</label>
                   <div class="col-sm-10">
                     <div class="input-group">
-                        <input type="number" class="form-control" name="bobot">
+                        <input type="number" class="form-control" name="bobot" min="0" max="100">
                         <span class="input-group-text"><i class="bi bi-percent"></i></span>
                     </div>
                   </div>
@@ -84,7 +84,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">List Penilaian Keahlian Tiap Divisi</h5>
+              <h5 class="card-title">List Penilaian Keahlian Tiap Jabatan</h5>
 
               <!-- General Form Elements -->
               <form method="post" action="<?php echo e(url('list-keahlian')); ?>">
@@ -92,7 +92,7 @@
                 <?php echo method_field("GET"); ?>
 
                 <div class="row mb-3">
-                  <label for="inputtDivisi" class="col-sm-2 col-form-label">Pilih Divisi</label>
+                  <label for="inputtDivisi" class="col-sm-2 col-form-label">Pilih Jabatan</label>
                   <div class="col-sm-10">
                   <select class="form-select" name="id_divisi">
                       <?php $__currentLoopData = $divisi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -133,7 +133,7 @@
                     <tr>
                       <th scope="col">No.</th>
                       <th scope="col">Nama Keahlian</th>
-                      <th scope="col">Divisi</th>
+                      <th scope="col">Jabatan</th>
                       <th scope="col">Bobot (%)</th>
                       <th scope="col">Aksi</th>
                     </tr>
@@ -146,7 +146,7 @@
                       <?php echo csrf_field(); ?>
                       <?php echo method_field("PUT"); ?>          
                       
-                      <th scope="row"><input type="text" class="form-control" name="id_keahlian" value="<?php echo e($data->id_keahlian); ?>" hidden><?php echo e($no+1); ?></th>
+                      <th scope="row"><input type="text" class="form-control" name="id_divisi" value="<?php echo e($data->id_divisi); ?>" hidden><input type="text" class="form-control" name="id_keahlian" value="<?php echo e($data->id_keahlian); ?>" hidden><?php echo e($no+1); ?></th>
                       <td><input style="width: auto;" type="text" class="form-control" name="keahlian" value="<?php echo e($data->keahlian); ?>"></td>
                       <td><?php echo e($data->nama_divisi); ?> - <?php echo e($data->bidang); ?></td>
                       <td><input style="width: auto;" type="number" class="form-control" name="bobot" value="<?php echo e($data->bobot); ?>"></td>

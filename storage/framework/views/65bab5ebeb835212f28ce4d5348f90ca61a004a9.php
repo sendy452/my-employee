@@ -94,7 +94,7 @@
 
                       <tr>   
                         <th colspan="2">Nama Karyawan</th>
-                        <td colspan="3"><?php echo e($bio->nama); ?></td>
+                        <td colspan="3"><input type="text" class="form-control" name="id_divisi" value="<?php echo e($bio->id_divisi); ?>" hidden><?php echo e($bio->nama); ?></td>
                         <th>Nilai Bulan Lalu</th>
                         <td><?php $__currentLoopData = $totalkinerjaakhir; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tk): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <?php echo e($tk->total); ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></td>
                         <td>Sangat Baik</td>

@@ -16,12 +16,18 @@ class PenilaianController extends Controller
         $this->middleware('auth:web');
     }
     
-    public function listKinerja()
+    public function listKinerja(Request $request)
     {
-        $kinerja = Kinerja::where('is_active',1)->orderBy('id_kategori','asc')->get();
         $kategori = Kategori::get();
-
-        return view('list-kinerja', ['kinerja' => $kinerja, 'kategori' => $kategori]);
+        $kinerja = Kinerja::leftJoin('tb_divisi', 'tb_kinerja.id_divisi', '=', 'tb_divisi.id_divisi')->where('tb_kinerja.is_active',1)->where('tb_kinerja.id_divisi', $request->id_divisi)->get();
+        $divisi = Divisi::orderBy('nama_divisi','asc')->get();
+       
+        $check = Kinerja::leftJoin('tb_divisi', 'tb_kinerja.id_divisi', '=', 'tb_divisi.id_divisi')->where('tb_kinerja.is_active',1)->where('tb_kinerja.id_divisi', $request->id_divisi)->count('kinerja');
+        if ($request->id_divisi != null && $check == 0) {
+            $errors = 'List penilaian belum dibuat.';
+            return view('list-kinerja', ['kinerja' => $kinerja, 'kategori' => $kategori, 'divisi' => $divisi])->withErrors($errors);
+        }
+        return view('list-kinerja', ['kinerja' => $kinerja, 'kategori' => $kategori, 'divisi' => $divisi]);
     }
 
     public function addKategori(Request $request)
@@ -85,7 +91,7 @@ class PenilaianController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'kinerja' => 'string|unique:tb_kinerja,kinerja',
+            'kinerja' => 'string|unique:tb_kinerja,kinerja,nul,id_kinerja,id_divisi,'.$request->id_divisi.',id_kategori,'.$request->id_kategori,
         ],[
             'kinerja.unique' => 'Kinerja telah didaftarkan sebelumnya.',
         ]);
@@ -99,6 +105,7 @@ class PenilaianController extends Controller
         Kinerja::create([
             'kinerja' => $request->kinerja,
             'id_kategori' => $request->id_kategori,
+            'id_divisi' => $request->id_divisi,
             'bobot' => $request->bobot,
             'target' => $request->target
         ]);
@@ -121,7 +128,7 @@ class PenilaianController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'kinerja' => 'string|unique:tb_kinerja,kinerja,'.$request->id_kinerja.',id_kinerja',
+            'kinerja' => 'string|unique:tb_kinerja,kinerja,'.$request->id_kinerja.',id_kinerja,id_divisi,'.$request->id_divisi.',id_kategori,'.$request->id_kategori,
         ],[
             'kinerja.unique' => 'Kinerja telah didaftarkan sebelumnya.',
         ]);

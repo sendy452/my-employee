@@ -158,8 +158,8 @@
                       <tr>
                           <td colspan="5"><input value="{{$data->id_penilaian_kinerja}}" name="id_penilaian_kinerja[{{$no+1}}]" hidden><input value="{{$data->id_kinerja}}" name="id_kinerja[{{$no+1}}]" hidden>{{$data->kinerja}}</td>
                           <td><input onblur="findTotal1()" type="number" class="bobot1" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
-                          <td><input onblur="findTotal1()" value="{{$data->nilai}}" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai1" required/><br></td>
-                          <td>{{$data->target}}.00</td>
+                          <td><input style="width:100%" onblur="findTotal1()" value="{{$data->nilai}}" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai1" required/><br></td>
+                          <td>{{$data->target}}</td>
                           <td><input onblur="findTotal1()" type="number" step="0.01" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai1{{$i}}" value="{{$data->bobot_nilai}}"/></td>
                       </tr>
                       <?php $total_bobot1 += $data->bobot;?>
@@ -191,8 +191,8 @@
                       <tr>
                           <td colspan="5"><input value="{{$data->id_penilaian_kinerja}}" name="id_penilaian_kinerja[{{$no+1}}]" hidden><input value="{{$data->id_kinerja}}" name="id_kinerja[{{$no+1}}]" hidden>{{$data->kinerja}}</td>
                           <td><input onblur="findTotal2()" type="number" class="bobot2" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
-                          <td><input onblur="findTotal2()" value="{{$data->nilai}}" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai2" required/><br></td>
-                          <td>{{$data->target}}.00</td>
+                          <td><input style="width:100%" onblur="findTotal2()" value="{{$data->nilai}}" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai2" required/><br></td>
+                          <td>{{$data->target}}</td>
                           <td><input onblur="findTotal2()" type="number" step="0.01" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai2{{$i}}" value="{{$data->bobot_nilai}}"/></td>
                       </tr>
                       <?php $total_bobot2 += $data->bobot;?>
@@ -224,8 +224,8 @@
                       <tr>
                         <td colspan="5"><input value="{{$data->id_penilaian_kinerja}}" name="id_penilaian_kinerja[{{$no+1}}]" hidden><input value="{{$data->id_kinerja}}" name="id_kinerja[{{$no+1}}]" hidden>{{$data->kinerja}}</td>
                         <td><input onblur="findTotal3()" type="number" class="bobot3" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
-                        <td><input onblur="findTotal3()" value="{{$data->nilai}}" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai3" required/><br></td>
-                        <td>{{$data->target}}.00</td>
+                        <td><input style="width:100%" onblur="findTotal3()" value="{{$data->nilai}}" type="number" min="1" max="{{$data->target}}" name="nilai[{{$no+1}}]" class="nilai3" required/><br></td>
+                        <td>{{$data->target}}</td>
                         <td><input onblur="findTotal3()" type="number" step="0.01" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai3{{$i}}" value="{{$data->bobot_nilai}}"/></td>
                       </tr>
                       <?php $total_bobot3 += $data->bobot;?>
@@ -246,9 +246,9 @@
                       <tr>
                         <th colspan="5">Total Score</th>
                         <td>{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</td>
-                        <td colspan="2">4.00</td>
                         @foreach($totalkinerja as $tk)
-                        <th><input type="number" value="{{$tk->total}}" step="0.01" name="total_score" id="total"/></th>
+                        <th colspan="2">Ket Penilaian : @if($tk->total >= 1 && $tk->total <= 25) Buruk @elseif($tk->total >= 26 && $tk->total <= 50) Sedang @elseif($tk->total >= 51 && $tk->total <= 75) Baik @elseif($tk->total >= 76 && $tk->total <= 100) Sangat Baik @endif</th>
+                        <th><input style="width:60%" type="number" value="{{$tk->total}}" step="0.01" name="total_score" id="total"/> /{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</th>
                         @endforeach
                       </tr>
 

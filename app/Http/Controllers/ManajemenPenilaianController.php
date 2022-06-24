@@ -24,7 +24,7 @@ class ManajemenPenilaianController extends Controller
     
     public function penilaianKinerja(Request $request, $divisi = "")
     {
-        $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
+        $karyawan = User::where('is_active', 1)->orderBy('nama','asc')->get();
         $kategori = Kategori::where('is_active', 1)->get();
         $bio = "";
        
@@ -36,7 +36,7 @@ class ManajemenPenilaianController extends Controller
                 'bulan' => 'string'
             ],[
                 'bulan.string' => 'Bulan harus dipilih.',
-                'idkaryawan.numeric' => 'Email Karyawan harus dipilih.'
+                'idkaryawan.numeric' => 'Nama Karyawan harus dipilih.'
             ]);
 
             //Send failed response if request is not valid
@@ -61,7 +61,8 @@ class ManajemenPenilaianController extends Controller
         $kinerja2 = Kinerja::where('is_active', 1)->where('id_kategori',3)->where('id_divisi', $divisi)->get();
 
         if ($divisi != "" && $hitung == 0) {
-            $errors = 'List penilaian belum dibuat.';
+            $jabatan = Divisi::select('bidang')->where('id_divisi', $divisi)->first()->bidang;
+            $errors = 'List penilaian jabatan '.$jabatan.' belum dibuat.';
             return redirect()->back()->withErrors($errors);
         }
 
@@ -76,7 +77,7 @@ class ManajemenPenilaianController extends Controller
 
     public function addPenilaianKinerja(Request $request)
     {
-        $batas = Kinerja::where('is_active', 1)->count('kinerja');
+        $batas = Kinerja::where('is_active', 1)->where('id_divisi', $request->id_divisi)->count('kinerja');
 
         $data = $request->all();
         $validator = Validator::make($data, [
@@ -122,7 +123,7 @@ class ManajemenPenilaianController extends Controller
 
     public function editPenilaianKinerja(Request $request)
     {
-        $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
+        $karyawan = User::where('is_active', 1)->orderBy('nama','asc')->get();
         $kategori = Kategori::get();
         $hitung = PenilaianKinerja::where('id_karyawan', $request->idkaryawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->where('is_active', 1)->where('id_kategori',1)->count('id_kinerja');
         $hitung2 = PenilaianKinerja::where('id_karyawan', $request->idkaryawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->where('is_active', 1)->where('id_kategori',2)->count('id_kinerja');
@@ -144,7 +145,7 @@ class ManajemenPenilaianController extends Controller
                 'bulan' => 'string'
             ],[
                 'bulan.string' => 'Bulan harus dipilih.',
-                'idkaryawan.numeric' => 'Email Karyawan harus dipilih.'
+                'idkaryawan.numeric' => 'Nama Karyawan harus dipilih.'
             ]);
 
             //Send failed response if request is not valid
@@ -209,7 +210,7 @@ class ManajemenPenilaianController extends Controller
 
     public function penilaianKeahlian(Request $request)
     {
-        $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
+        $karyawan = User::where('is_active', 1)->orderBy('nama','asc')->get();
         $divisi = Divisi::where('is_active', 1)->get();
         $keahlian = Keahlian::where('id_divisi', $request->id_divisi)->where('is_active', 1)->get();
         $bio = "";
@@ -222,7 +223,7 @@ class ManajemenPenilaianController extends Controller
                 'bulan' => 'string'
             ],[
                 'bulan.string' => 'Bulan harus dipilih.',
-                'idkaryawan.numeric' => 'Email Karyawan harus dipilih.'
+                'idkaryawan.numeric' => 'Nama Karyawan harus dipilih.'
             ]);
 
             //Send failed response if request is not valid
@@ -294,7 +295,7 @@ class ManajemenPenilaianController extends Controller
 
     public function editPenilaianKeahlian(Request $request)
     {
-        $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
+        $karyawan = User::where('is_active', 1)->orderBy('nama','asc')->get();
         $divisi = Divisi::get();
         $penilaiankeahlian = PenilaianKeahlian::leftJoin('tb_keahlian', 'tb_penilaian_keahlian.id_keahlian', '=', 'tb_keahlian.id_keahlian')
         ->where('tb_penilaian_keahlian.id_divisi', $request->id_divisi)->where('id_karyawan', $request->idkaryawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->where('id_karyawan',$request->idkaryawan)->orderBy('tb_penilaian_keahlian.id_keahlian', 'asc')->get();
@@ -309,7 +310,7 @@ class ManajemenPenilaianController extends Controller
                 'idkaryawan' => 'numeric',
                 'bulan' => 'string'
             ],[
-                'idkaryawan.numeric' => 'Email Karyawan harus dipilih.',
+                'idkaryawan.numeric' => 'Nama Karyawan harus dipilih.',
                 'bulan.string' => 'Bulan harus dipilih.'
             ]);
 

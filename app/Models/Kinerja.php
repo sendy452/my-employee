@@ -22,6 +22,7 @@ class Kinerja extends Model
         'id_kinerja',
         'kinerja',
         'id_kategori',
+        'id_divisi',
         'bobot',
         'target',
         'is_active'

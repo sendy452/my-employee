@@ -94,7 +94,7 @@
 
                       <tr>   
                         <th colspan="2">Nama Karyawan</th>
-                        <td colspan="3">{{$bio->nama}}</td>
+                        <td colspan="3"><input type="text" class="form-control" name="id_divisi" value="{{$bio->id_divisi}}" hidden>{{$bio->nama}}</td>
                         <th>Nilai Bulan Lalu</th>
                         <td>@foreach($totalkinerjaakhir as $tk) {{$tk->total}} @endforeach</td>
                         <td>Sangat Baik</td>
