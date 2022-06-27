@@ -38,7 +38,7 @@
                 @method("GET")
 
                 <div class="row mb-3">
-                    <label for="Email" class="col-md-4 col-lg-3 col-form-label">Nama Karyawan</label>
+                    <label for="Nama" class="col-md-4 col-lg-3 col-form-label">Nama Karyawan</label>
                     <div class="col-md-8 col-lg-9">
                         <select onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' class="form-select" name="idkaryawan">
                             <option><h1>-----Pilih Karyawan-----</h1></option>
@@ -99,7 +99,7 @@
                         <th>Nilai Bulan Lalu</th>
                         <td>@foreach($totalkinerjaakhir as $tk) {{$tk->total}} @endforeach</td>
                         <td>Sangat Baik</td>
-                        <td>4</td>
+                        <td>76-100</td>
                       </tr>
 
                       <tr>
@@ -111,7 +111,7 @@
                         <td>{{$tk->total}}</td>
                         @endforeach
                         <td>Baik</td>
-                        <td>3</td>
+                        <td>51-75</td>
                       </tr>
 
                       <tr>
@@ -120,7 +120,7 @@
                         <th></th>
                         <td></td>
                         <td>Sedang</td>
-                        <td>2</td>
+                        <td>26-50</td>
                       </tr>
 
                       <tr>
@@ -130,7 +130,7 @@
                         <th></th>
                         <td></td>
                         <td>Buruk</td>
-                        <td>1</td>
+                        <td>1-25</td>
                       </tr>
 
                       <tr><td colspan="9"></td></tr>
@@ -158,7 +158,7 @@
                           <td colspan="5">{{$data->kinerja}}</td>
                           <td>{{$data->bobot}}%</td>
                           <td>{{$data->nilai ?? "0"}}</td>
-                          <td>{{$data->target}}.00</td>
+                          <td>{{$data->target}}</td>
                           <td>{{$data->bobot_nilai ?? "0"}}</td>
                       </tr>
                       <?php $total_bobot1 += $data->bobot;?>
@@ -191,7 +191,7 @@
                           <td colspan="5">{{$data->kinerja}}</td>
                           <td>{{$data->bobot}}%</td>
                           <td>{{$data->nilai ?? "0"}}</td>
-                          <td>{{$data->target}}.00</td>
+                          <td>{{$data->target}}</td>
                           <td>{{$data->bobot_nilai ?? "0"}}</td>
                       </tr>
                       <?php $total_bobot2 += $data->bobot;?>
@@ -224,7 +224,7 @@
                         <td colspan="5">{{$data->kinerja}}</td>
                         <td>{{$data->bobot}}%</td>
                         <td>{{$data->nilai ?? "0"}}</td>
-                        <td>{{$data->target}}.00</td>
+                        <td>{{$data->target}}</td>
                         <td>{{$data->bobot_nilai ?? "0"}}</td>
                       </tr>
                       <?php $total_bobot3 += $data->bobot;?>
@@ -245,9 +245,9 @@
                       <tr>
                         <th colspan="5">Total Score</th>
                         <th>{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</th>
-                        <th colspan="2">4.00</th>
                         @foreach($totalkinerja as $tk)
-                        <th>{{$tk->total}}</th>
+                        <th colspan="2">Ket Penilaian : @if($tk->total >= 1 && $tk->total <= 25) Buruk @elseif($tk->total >= 26 && $tk->total <= 50) Sedang @elseif($tk->total >= 51 && $tk->total <= 75) Baik @elseif($tk->total >= 76 && $tk->total <= 100) Sangat Baik @endif</th>
+                        <th>{{$tk->total}}/{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}</th>
                         @endforeach
                       </tr>
 

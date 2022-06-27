@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use PDF;
 use App\Exports\LaporanKinerjaExport;
 use Maatwebsite\Excel\Facades\Excel;
+use DB;
 
 class LaporanKinerjaController extends Controller
 {
@@ -68,7 +69,7 @@ class LaporanKinerjaController extends Controller
 
     public function laporanKaryawan(Request $request)
     {
-        $karyawan = User::where('is_active', 1)->orderBy('email','asc')->get();
+        $karyawan = User::where('is_active', 1)->orderBy('nama','asc')->get();
         $kategori = Kategori::get();
         $hitung = PenilaianKinerja::where('id_karyawan', $request->idkaryawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->where('is_active', 1)->where('id_kategori',1)->count('id_kinerja');
         $hitung2 = PenilaianKinerja::where('id_karyawan', $request->idkaryawan)->where('bulan', date('F-Y',strtotime($request->bulan)))->where('is_active', 1)->where('id_kategori',2)->count('id_kinerja');
@@ -142,5 +143,59 @@ class LaporanKinerjaController extends Controller
         ->leftJoin('tb_role', 'tb_karyawan.id_role', '=', 'tb_role.id_role')->where('id_karyawan',$id_karyawan)->get();
 
         return Excel::download(new LaporanKinerjaExport($bulan, $id_karyawan), 'Laporan Kinerja Karyawan '.$bio[0]->nama.' '.date('F-Y').'.xlsx');
+    }
+
+    public function laporanTahun(Request $request)
+    {
+        $karyawan = User::where('is_active', 1)->orderBy('nama','asc')->get();
+       
+        $kinerja_tahun = TotalKinerja::leftJoin('tb_karyawan', 'tb_total_kinerja.id_karyawan', '=', 'tb_karyawan.id_karyawan')
+        ->leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
+        ->where('tb_total_kinerja.is_active',1)->where('tb_karyawan.id_karyawan', $request->idkaryawan)->where('bulan', 'LIKE', '%'.$request->tahun.'%')->orderBy('id_form', 'desc')->get();
+        
+        $labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        $datas = [];
+        foreach ($labels as $no => $value) {
+            //$datas[] = DB::statement('select IFNULL((select total from tb_total_kinerja where id_karyawan = '. $request->idkaryawan.' and bulan = "'.$value.'-'.$request->tahun.'"), 0)');
+            $datas[] = TotalKinerja::select(\DB::raw('(CASE WHEN total = null THEN 0 ELSE total END) AS total'))->where(\DB::raw('id_karyawan'), $request->idkaryawan)->where(\DB::raw('bulan'), 'like', $value.'-%')->where(\DB::raw('bulan'), 'like', '%-'.$request->tahun)->first()->total ?? 0;
+        }
+
+        if ($request != "") {
+
+            $data = $request->all();
+            $validator = Validator::make($data, [
+                'idkaryawan' => 'numeric'
+            ],[
+                'idkaryawan.numeric' => 'Nama karyawan harus dipilih.'
+            ]);
+
+            //Send failed response if request is not valid
+            if ($validator->fails()) {
+                $errors = $validator->errors();
+                return redirect()->back()->withErrors($errors);
+            }
+
+            $check = TotalKinerja::leftJoin('tb_karyawan', 'tb_total_kinerja.id_karyawan', '=', 'tb_karyawan.id_karyawan')
+            ->leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
+            ->where('tb_total_kinerja.is_active',1)->where('tb_karyawan.id_karyawan', $request->idkaryawan)->where('bulan', 'LIKE', '%'.$request->tahun.'%')->count('tb_karyawan.id_karyawan');
+            if ($request->tahun != "" && $check == 0) {
+                $errors = 'Penilaian karyawan tidak ditemukan.';
+                return redirect()->back()->withErrors($errors);
+            }
+        }
+
+        return view('laporan-kinerja-tahun', ['kinerja_tahun' => $kinerja_tahun, 'karyawan' => $karyawan, 'tahun' => $request->tahun, 'id_karyawan' => $request->idkaryawan])->with('labels', $labels)->with('datas', $datas);
+    }
+
+    public function exportTahun($tahun, $id_karyawan)
+    {
+        $kinerja_tahun = TotalKinerja::leftJoin('tb_karyawan', 'tb_total_kinerja.id_karyawan', '=', 'tb_karyawan.id_karyawan')
+        ->leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
+        ->where('tb_total_kinerja.is_active',1)->where('tb_karyawan.id_karyawan', $id_karyawan)->where('bulan', 'LIKE', '%'.$tahun.'%')->orderBy('id_form', 'desc')->get();
+        
+        $pdf = PDF::loadview('export-kinerja-tahun', ['kinerja_tahun' => $kinerja_tahun, 'tahun' => $tahun]);
+        return $pdf->download('Laporan Kinerja Per Tahun '.$tahun.'-'.$kinerja_tahun[0]->nama.'.pdf');
+
+        //return view('export-kinerja-divisi', ['kinerja_divisi' => $kinerja_divisi]);
     }
 }

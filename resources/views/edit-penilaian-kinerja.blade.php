@@ -248,7 +248,7 @@
                         <td>{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</td>
                         @foreach($totalkinerja as $tk)
                         <th colspan="2">Ket Penilaian : @if($tk->total >= 1 && $tk->total <= 25) Buruk @elseif($tk->total >= 26 && $tk->total <= 50) Sedang @elseif($tk->total >= 51 && $tk->total <= 75) Baik @elseif($tk->total >= 76 && $tk->total <= 100) Sangat Baik @endif</th>
-                        <th><input style="width:60%" type="number" value="{{$tk->total}}" step="0.01" name="total_score" id="total"/> /{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}%</th>
+                        <th><input style="width:60%" type="number" value="{{$tk->total}}" step="0.01" name="total_score" id="total"/> /{{$kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot}}</th>
                         @endforeach
                       </tr>
 

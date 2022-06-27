@@ -248,7 +248,7 @@
                         <td><?php echo e($kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot); ?>%</td>
                         <?php $__currentLoopData = $totalkinerja; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tk): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <th colspan="2">Ket Penilaian : <?php if($tk->total >= 1 && $tk->total <= 25): ?> Buruk <?php elseif($tk->total >= 26 && $tk->total <= 50): ?> Sedang <?php elseif($tk->total >= 51 && $tk->total <= 75): ?> Baik <?php elseif($tk->total >= 76 && $tk->total <= 100): ?> Sangat Baik <?php endif; ?></th>
-                        <th><input style="width:60%" type="number" value="<?php echo e($tk->total); ?>" step="0.01" name="total_score" id="total"/> /<?php echo e($kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot); ?>%</th>
+                        <th><input style="width:60%" type="number" value="<?php echo e($tk->total); ?>" step="0.01" name="total_score" id="total"/> /<?php echo e($kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot); ?></th>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                       </tr>
 

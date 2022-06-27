@@ -96,6 +96,8 @@ Route::get('export-divisi-pdf/{bulan}/{id_divisi}', [LaporanKinerjaController::c
 Route::get('laporan-penilaian-kinerja', [LaporanKinerjaController::class, 'laporanKaryawan']);
 Route::get('export-karyawan-pdf/{bulan}/{id_karyawan}', [LaporanKinerjaController::class, 'exportKaryawanPDF']);
 Route::get('export-karyawan-excel/{bulan}/{id_karyawan}', [LaporanKinerjaController::class, 'exportKaryawanExcel']);
+Route::get('laporan-penilaian-kinerja-tahun', [LaporanKinerjaController::class, 'laporanTahun']);
+Route::get('export-tahun-pdf/{tahun}/{id_karyawan}', [LaporanKinerjaController::class, 'exportTahun']);
 
 //Laporan Penilaian Keahlian
 Route::get('laporan-penilaian-keahlian-divisi', [LaporanKeahlianController::class, 'laporanDivisi']);
@@ -103,5 +105,7 @@ Route::get('export-keahlian-divisi-pdf/{bulan}/{id_divisi}', [LaporanKeahlianCon
 Route::get('laporan-penilaian-keahlian', [LaporanKeahlianController::class, 'laporanKaryawan']);
 Route::get('export-keahlian-pdf/{bulan}/{id_karyawan}/{id_divisi}', [LaporanKeahlianController::class, 'exportKaryawanPDF']);
 Route::get('export-keahlian-excel/{bulan}/{id_karyawan}/{id_divisi}', [LaporanKeahlianController::class, 'exportKaryawanExcel']);
+Route::get('laporan-penilaian-keahlian-tahun', [LaporanKeahlianController::class, 'laporanTahun']);
+Route::get('export-keahlian-tahun-pdf/{tahun}/{id_karyawan}', [LaporanKeahlianController::class, 'exportTahun']);
 
 });

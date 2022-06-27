@@ -134,4 +134,56 @@ class LaporanKeahlianController extends Controller
 
         return Excel::download(new LaporanKeahlianExport($bulan, $id_karyawan, $id_divisi), 'Laporan Keahlian Karyawan '.$bio[0]->nama.' '.date('F-Y').'.xlsx');
     }
+
+    public function laporanTahun(Request $request)
+    {
+        $keahlian_divisi = TotalKeahlian::leftJoin('tb_karyawan', 'tb_total_keahlian.id_karyawan', '=', 'tb_karyawan.id_karyawan')
+        ->leftJoin('tb_divisi', 'tb_total_keahlian.id_divisi', '=', 'tb_divisi.id_divisi')
+        ->where('tb_total_keahlian.is_active',1)->where('tb_total_keahlian.id_divisi', $request->id_divisi)->where('bulan', date('F-Y',strtotime($request->bulan)))->orderBy('total', 'desc')->get();
+        $divisi = Divisi::orderBy('nama_divisi','asc')->get();
+        $bio = User::leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
+            ->get();
+       
+        if ($request != "") {
+
+            $data = $request->all();
+            $validator = Validator::make($data, [
+                'bulan' => 'string'
+            ],[
+                'bulan.string' => 'Bulan harus dipilih.'
+            ]);
+
+            //Send failed response if request is not valid
+            if ($validator->fails()) {
+                $errors = $validator->errors();
+                return redirect()->back()->withErrors($errors);
+            }
+
+            $check = TotalKeahlian::leftJoin('tb_karyawan', 'tb_total_keahlian.id_karyawan', '=', 'tb_karyawan.id_karyawan')
+            ->leftJoin('tb_divisi', 'tb_total_keahlian.id_divisi', '=', 'tb_divisi.id_divisi')
+            ->where('tb_total_keahlian.is_active',1)->where('tb_total_keahlian.id_divisi', $request->id_divisi)->where('bulan', date('F-Y',strtotime($request->bulan)))->count('tb_karyawan.id_karyawan');
+            if ($request->bulan != "" && $check == 0) {
+                $errors = 'List penilaian karyawan tidak ditemukan.';
+                return redirect()->back()->withErrors($errors);
+            }
+        }
+        
+        return view('laporan-keahlian-divisi', ['keahlian_divisi' => $keahlian_divisi, 'bio' => $bio,'divisi' => $divisi, 'bulan' => $request->bulan, 'id_divisi' => $request->id_divisi]);
+    }
+
+    public function exportTahun($bulan, $id_divisi)
+    {
+        $keahlian_divisi = TotalKeahlian::leftJoin('tb_karyawan', 'tb_total_keahlian.id_karyawan', '=', 'tb_karyawan.id_karyawan')
+        ->leftJoin('tb_divisi', 'tb_total_keahlian.id_divisi', '=', 'tb_divisi.id_divisi')
+        ->where('tb_total_keahlian.is_active',1)->where('tb_total_keahlian.id_divisi', $id_divisi)->where('bulan', date('F-Y',strtotime($bulan)))->orderBy('total', 'desc')->get();
+        $bio = User::leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
+            ->get();
+
+        $pdf = PDF::loadview('export-keahlian-divisi', ['keahlian_divisi' => $keahlian_divisi, 'bio' => $bio]);
+        //return $pdf->stream();
+        return $pdf->download('Laporan Keahlian Per Divisi '.$keahlian_divisi[0]->nama_divisi.'-'.$keahlian_divisi[0]->bidang.' '.date('F-Y').'.pdf');
+
+        //return view('export-kinerja-divisi', ['kinerja_divisi' => $kinerja_divisi]);
+    }
+
 }

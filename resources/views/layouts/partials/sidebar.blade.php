@@ -69,10 +69,10 @@ $page = $components[1];
       </li><!-- End Penilaian Nav -->
 
       <li class="nav-item">
-        <a class="nav-link {{ $page =="laporan-penilaian-kinerja-divisi" || $page=="laporan-penilaian-kinerja" ? "" : "collapsed"}}" data-bs-target="#kinerja-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link {{ $page =="laporan-penilaian-kinerja-divisi" || $page=="laporan-penilaian-kinerja" || $page=="laporan-penilaian-kinerja-tahun" ? "" : "collapsed"}}" data-bs-target="#kinerja-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-check"></i><span>Laporan Kinerja</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="kinerja-nav" class="nav-content collapse {{ $page =="laporan-penilaian-kinerja-divisi" || $page=="laporan-penilaian-kinerja" ? "show" : ""}}" data-bs-parent="#sidebar-nav">
+        <ul id="kinerja-nav" class="nav-content collapse {{ $page =="laporan-penilaian-kinerja-divisi" || $page=="laporan-penilaian-kinerja" || $page=="laporan-penilaian-kinerja-tahun" ? "show" : ""}}" data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{url('laporan-penilaian-kinerja-divisi')}}" class="{{ $page=="laporan-penilaian-kinerja-divisi" ? "active" : ""}}">
               <i class="bi bi-circle"></i><span>Laporan Per Divisi</span>
@@ -83,15 +83,20 @@ $page = $components[1];
               <i class="bi bi-circle"></i><span>Laporan Per Karyawan</span>
             </a>
           </li>
+          <li>
+            <a href="{{url('laporan-penilaian-kinerja-tahun')}}" class="{{ $page=="laporan-penilaian-kinerja-tahun" ? "active" : ""}}">
+              <i class="bi bi-circle"></i><span>Laporan Per Tahun</span>
+            </a>
+          </li>
         </ul>
       </li>
       <!-- End Laporan Kinerja Nav -->
 
       <li class="nav-item">
-        <a class="nav-link {{ $page =="laporan-penilaian-keahlian-divisi" || $page=="laporan-penilaian-keahlian" ? "" : "collapsed"}}" data-bs-target="#keahlian-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link {{ $page =="laporan-penilaian-keahlian-divisi" || $page=="laporan-penilaian-keahlian" || $page=="laporan-penilaian-keahlian-tahun" ? "" : "collapsed"}}" data-bs-target="#keahlian-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-bookmark"></i><span>Laporan Keahlian</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="keahlian-nav" class="nav-content collapse {{ $page =="laporan-penilaian-keahlian-divisi" || $page=="laporan-penilaian-keahlian" ? "show" : ""}}" data-bs-parent="#sidebar-nav">
+        <ul id="keahlian-nav" class="nav-content collapse {{ $page =="laporan-penilaian-keahlian-divisi" || $page=="laporan-penilaian-keahlian" || $page=="laporan-penilaian-keahlian-tahun" ? "show" : ""}}" data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{ url('laporan-penilaian-keahlian-divisi')}}" class="{{ $page=="laporan-penilaian-keahlian-divisi" ? "active" : ""}}">
               <i class="bi bi-circle"></i><span>Laporan Per Divisi</span>
@@ -100,6 +105,11 @@ $page = $components[1];
           <li>
             <a href="{{ url('laporan-penilaian-keahlian')}}" class="{{ $page=="laporan-penilaian-keahlian" ? "active" : ""}}">
               <i class="bi bi-circle"></i><span>Laporan Per Karyawan</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url('laporan-penilaian-keahlian-tahun')}}" class="{{ $page=="laporan-penilaian-keahlian-tahun" ? "active" : ""}}">
+              <i class="bi bi-circle"></i><span>Laporan Per Tahun</span>
             </a>
           </li>
         </ul>

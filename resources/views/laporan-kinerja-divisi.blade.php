@@ -30,7 +30,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Penilaian Kinerja Per Divisi</h5>
+              <h5 class="card-title">Laporan Kinerja Per Divisi</h5>
               
               <!-- General Form Elements -->
               <form method="post" action="{{ url('laporan-penilaian-kinerja-divisi') }}">
@@ -76,7 +76,7 @@
   
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Penilaian Kinerja Per Divisi<a href="{{url('export-divisi-pdf/'.date('F-Y',strtotime($bulan)).'/'.$id_divisi)}}" type="button" class="btn btn-danger float-end" {{ $bulan == null ? "hidden" : "" }}>Cetak PDF</a></h5>
+                <h5 class="card-title">Laporan Kinerja Per Divisi<a href="{{url('export-divisi-pdf/'.date('F-Y',strtotime($bulan)).'/'.$id_divisi)}}" type="button" class="btn btn-danger float-end" {{ $bulan == null ? "hidden" : "" }}>Cetak PDF</a></h5>
   
                 <div class="table-responsive">
                   <!-- Default Table -->

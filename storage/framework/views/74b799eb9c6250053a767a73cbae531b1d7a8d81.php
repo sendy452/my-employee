@@ -38,12 +38,12 @@
                 <?php echo method_field("GET"); ?>
 
                 <div class="row mb-3">
-                    <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email Karyawan</label>
+                    <label for="Nama" class="col-md-4 col-lg-3 col-form-label">Nama Karyawan</label>
                     <div class="col-md-8 col-lg-9">
                         <select onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' class="form-select" name="idkaryawan">
-                            <option><h1>-----Pilih Email!-----</h1></option>
+                            <option><h1>-----Pilih Karyawan-----</h1></option>
                             <?php $__currentLoopData = $karyawan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($data->id_karyawan); ?>"><?php echo e($data->email); ?></option>
+                            <option value="<?php echo e($data->id_karyawan); ?>"><?php echo e($data->nama); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
@@ -99,7 +99,7 @@
                         <th>Nilai Bulan Lalu</th>
                         <td><?php $__currentLoopData = $totalkinerjaakhir; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tk): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <?php echo e($tk->total); ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></td>
                         <td>Sangat Baik</td>
-                        <td>4</td>
+                        <td>76-100</td>
                       </tr>
 
                       <tr>
@@ -111,7 +111,7 @@
                         <td><?php echo e($tk->total); ?></td>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <td>Baik</td>
-                        <td>3</td>
+                        <td>51-75</td>
                       </tr>
 
                       <tr>
@@ -120,7 +120,7 @@
                         <th></th>
                         <td></td>
                         <td>Sedang</td>
-                        <td>2</td>
+                        <td>26-50</td>
                       </tr>
 
                       <tr>
@@ -130,7 +130,7 @@
                         <th></th>
                         <td></td>
                         <td>Buruk</td>
-                        <td>1</td>
+                        <td>1-25</td>
                       </tr>
 
                       <tr><td colspan="9"></td></tr>
@@ -158,7 +158,7 @@
                           <td colspan="5"><?php echo e($data->kinerja); ?></td>
                           <td><?php echo e($data->bobot); ?>%</td>
                           <td><?php echo e($data->nilai ?? "0"); ?></td>
-                          <td><?php echo e($data->target); ?>.00</td>
+                          <td><?php echo e($data->target); ?></td>
                           <td><?php echo e($data->bobot_nilai ?? "0"); ?></td>
                       </tr>
                       <?php $total_bobot1 += $data->bobot;?>
@@ -191,7 +191,7 @@
                           <td colspan="5"><?php echo e($data->kinerja); ?></td>
                           <td><?php echo e($data->bobot); ?>%</td>
                           <td><?php echo e($data->nilai ?? "0"); ?></td>
-                          <td><?php echo e($data->target); ?>.00</td>
+                          <td><?php echo e($data->target); ?></td>
                           <td><?php echo e($data->bobot_nilai ?? "0"); ?></td>
                       </tr>
                       <?php $total_bobot2 += $data->bobot;?>
@@ -224,7 +224,7 @@
                         <td colspan="5"><?php echo e($data->kinerja); ?></td>
                         <td><?php echo e($data->bobot); ?>%</td>
                         <td><?php echo e($data->nilai ?? "0"); ?></td>
-                        <td><?php echo e($data->target); ?>.00</td>
+                        <td><?php echo e($data->target); ?></td>
                         <td><?php echo e($data->bobot_nilai ?? "0"); ?></td>
                       </tr>
                       <?php $total_bobot3 += $data->bobot;?>
@@ -245,9 +245,9 @@
                       <tr>
                         <th colspan="5">Total Score</th>
                         <th><?php echo e($kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot); ?>%</th>
-                        <th colspan="2">4.00</th>
                         <?php $__currentLoopData = $totalkinerja; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tk): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <th><?php echo e($tk->total); ?></th>
+                        <th colspan="2">Ket Penilaian : <?php if($tk->total >= 1 && $tk->total <= 25): ?> Buruk <?php elseif($tk->total >= 26 && $tk->total <= 50): ?> Sedang <?php elseif($tk->total >= 51 && $tk->total <= 75): ?> Baik <?php elseif($tk->total >= 76 && $tk->total <= 100): ?> Sangat Baik <?php endif; ?></th>
+                        <th><?php echo e($tk->total); ?>/<?php echo e($kategori[0]->bobot+$kategori[1]->bobot+$kategori[2]->bobot); ?></th>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                       </tr>
 
