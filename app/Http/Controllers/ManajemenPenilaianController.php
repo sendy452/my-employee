@@ -66,6 +66,12 @@ class ManajemenPenilaianController extends Controller
             return redirect()->back()->withErrors($errors);
         }
 
+        if ($divisi == "" && $hitung == 0) {
+            $jabatan = Divisi::select('bidang')->where('id_divisi', $divisi)->first()->bidang;
+            $errors = 'Belum penempatan jabatan karyawan.';
+            return redirect()->back()->withErrors($errors);
+        }
+
         $check = TotalKinerja::where('bulan', date('F-Y',strtotime($request->bulan)))->where('id_karyawan', $request->idkaryawan)->count('bulan');
         if ($check != 0) {
             $errors = 'Form penilaian karyawan telah didaftarkan sebelumnya.';
