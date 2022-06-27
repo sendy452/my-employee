@@ -66,7 +66,7 @@ class ManajemenPenilaianController extends Controller
             return redirect()->back()->withErrors($errors);
         }
 
-        if ($divisi == "" && $hitung == 0) {
+        if ($request->idkaryawan != "" && $divisi == "" && $hitung == 0) {
             $errors = 'Belum penempatan jabatan karyawan.';
             return redirect()->back()->withErrors($errors);
         }
