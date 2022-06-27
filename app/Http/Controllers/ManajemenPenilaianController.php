@@ -67,7 +67,6 @@ class ManajemenPenilaianController extends Controller
         }
 
         if ($divisi == "" && $hitung == 0) {
-            $jabatan = Divisi::select('bidang')->where('id_divisi', $divisi)->first()->bidang;
             $errors = 'Belum penempatan jabatan karyawan.';
             return redirect()->back()->withErrors($errors);
         }
