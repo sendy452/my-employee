@@ -1,6 +1,6 @@
-@extends('layouts.template')
-@section('title', 'Laporan Keahlian')
-@section('content')
+
+<?php $__env->startSection('title', 'Laporan Keahlian'); ?>
+<?php $__env->startSection('content'); ?>
 
 <main id="main" class="main">
 
@@ -8,21 +8,21 @@
       <h1>Laporan Keahlian Per Tahun</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>">Dashboard</a></li>
           <li class="breadcrumb-item">Laporan Keahlian</li>
           <li class="breadcrumb-item active">Laporan Keahlian Per Tahun</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    @if($errors->any())
-        @foreach ($errors->all() as $danger)
-              <h6 class="alert alert-danger">{{ $danger }}</h6>
-        @endforeach
-      @endif
-    @if (session('message'))
-        <h6 class="alert alert-success">{{ session('message') }}</h6>
-    @endif
+    <?php if($errors->any()): ?>
+        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $danger): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <h6 class="alert alert-danger"><?php echo e($danger); ?></h6>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      <?php endif; ?>
+    <?php if(session('message')): ?>
+        <h6 class="alert alert-success"><?php echo e(session('message')); ?></h6>
+    <?php endif; ?>
 
     <section class="section">
       <div class="row">
@@ -33,18 +33,18 @@
               <h5 class="card-title">Laporan Keahlian Tiap Tahun</h5>
               
               <!-- General Form Elements -->
-              <form method="post" action="{{ url('laporan-penilaian-keahlian-tahun') }}">
-                @csrf
-                @method("GET")
+              <form method="post" action="<?php echo e(url('laporan-penilaian-keahlian-tahun')); ?>">
+                <?php echo csrf_field(); ?>
+                <?php echo method_field("GET"); ?>
 
                 <div class="row mb-3">
                     <label for="Nama" class="col-sm-2 col-form-label">Nama Karyawan</label>
                     <div class="col-sm-10">
                         <select onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' class="form-select" name="idkaryawan">
                             <option><h1>-----Pilih Karyawan-----</h1></option>
-                            @foreach($karyawan as $data)
-                            <option value="{{$data->id_karyawan}}">{{$data->nama}}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $karyawan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($data->id_karyawan); ?>"><?php echo e($data->nama); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                 </div>
@@ -52,9 +52,9 @@
                     <label for="inputDivisi" class="col-sm-2 col-form-label">Pilih Jabatan Tujuan</label>
                     <div class="col-sm-10">
                         <select class="form-select" name="id_divisi">
-                            @foreach($divisi as $data)
-                            <option value="{{$data->id_divisi}}">{{$data->nama_divisi}} - {{$data->bidang}}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $divisi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($data->id_divisi); ?>"><?php echo e($data->nama_divisi); ?> - <?php echo e($data->bidang); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>     
                     </div>
                 </div>
@@ -62,9 +62,9 @@
                     <label for="Bulan" class="col-sm-2 col-form-label">Tahun Penilaian</label>
                     <div class="col-sm-10">
                         <select onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'  class="form-control" name="tahun">
-                        @for ($year = (int)date('Y'); 2000 <= $year; $year--)
+                        <?php for($year = (int)date('Y'); 2000 <= $year; $year--): ?>
                             <option value="<?=$year;?>"><?=$year;?></option>
-                        @endfor
+                        <?php endfor; ?>
                         </select>
                     </div>
                 </div>
@@ -90,13 +90,13 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Grafik Penilaian Karyawan Per Tahun {{$tahun ?? ''}}</h5>
+                        <h5 class="card-title">Grafik Penilaian Karyawan Per Tahun <?php echo e($tahun ?? ''); ?></h5>
             
                         <!-- Line Chart -->
                         <canvas id="lineChart" style="max-height: 400px;"></canvas>
                         <script>
-                        const labels = {!! json_encode($labels) !!};
-                        const datas = {!! json_encode($datas) !!};
+                        const labels = <?php echo json_encode($labels); ?>;
+                        const datas = <?php echo json_encode($datas); ?>;
                         console.log(datas);
                         document.addEventListener("DOMContentLoaded", () => {
                             new Chart(document.querySelector('#lineChart'), {
@@ -135,7 +135,7 @@
   
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Laporan Keahlian Per Tahun {{$tahun ?? ''}}<a href="{{url('export-keahlian-tahun-pdf/'.$tahun.'/'.$id_divisi.'/'.$id_karyawan)}}" type="button" class="btn btn-danger float-end" {{ $tahun == null ? "hidden" : "" }}>Cetak PDF</a></h5>
+                <h5 class="card-title">Laporan Keahlian Per Tahun <?php echo e($tahun ?? ''); ?><a href="<?php echo e(url('export-keahlian-tahun-pdf/'.$tahun.'/'.$id_divisi.'/'.$id_karyawan)); ?>" type="button" class="btn btn-danger float-end" <?php echo e($tahun == null ? "hidden" : ""); ?>>Cetak PDF</a></h5>
   
                 <div class="table-responsive">
                   <!-- Default Table -->
@@ -154,18 +154,18 @@
                   </thead>
                   <tbody>        
                     
-                    @foreach($keahlian_tahun as $no => $data)
+                    <?php $__currentLoopData = $keahlian_tahun; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $no => $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>          
-                      <th scope="row"><input type="text" class="form-control" name="id_keahlian" value="{{$data->id_keahlian}}" hidden>{{$no+1}}</th>
-                      <td>{{$data->nip}}</td>
-                      <td>{{$data->nama}}</td>
-                      <td>{{$data->email}}</td>
-                      <td>@foreach($bio as $b) {{$b->id_karyawan == $data->id_karyawan ? $b->nama_divisi.' - '.$b->bidang : ""}}@endforeach</td>
-                      <td>{{$data->nama_divisi}} - {{$data->bidang}}</td>
-                      <td>{{$data->bulan}}</td>
-                      <td>{{$data->total}}%</td>
+                      <th scope="row"><input type="text" class="form-control" name="id_keahlian" value="<?php echo e($data->id_keahlian); ?>" hidden><?php echo e($no+1); ?></th>
+                      <td><?php echo e($data->nip); ?></td>
+                      <td><?php echo e($data->nama); ?></td>
+                      <td><?php echo e($data->email); ?></td>
+                      <td><?php $__currentLoopData = $bio; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <?php echo e($b->id_karyawan == $data->id_karyawan ? $b->nama_divisi.' - '.$b->bidang : ""); ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></td>
+                      <td><?php echo e($data->nama_divisi); ?> - <?php echo e($data->bidang); ?></td>
+                      <td><?php echo e($data->bulan); ?></td>
+                      <td><?php echo e($data->total); ?>%</td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </tbody>
                 </table>
                 <!-- End Default Table Example -->
@@ -178,3 +178,4 @@
       </section>
 
   </main>
+<?php echo $__env->make('layouts.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Apk\laragon\www\my-employee\resources\views/laporan-keahlian-tahun.blade.php ENDPATH**/ ?>

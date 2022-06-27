@@ -147,8 +147,8 @@
 
                       <tr>
                         <th colspan="5">Faktor Kompetensi</th>
-                        <th colspan="2">Bobot</th>
-                        <th >Nilai (%)</th>
+                        <th>Bobot</th>
+                        <th colspan="2">Nilai (%)</th>
                         <th>Bobot x Nilai (%)</th>
                       </tr>
 
@@ -157,8 +157,8 @@
                       @foreach($penilaiankeahlian as $i => $data)
                       <tr>
                           <td colspan="5"><input value="{{$penilaiankeahlian[$no]->id_keahlian == $data->id_keahlian ? $penilaiankeahlian[$no]->id_penilaian_keahlian : "0"}}" name="id_penilaian_keahlian[{{$no+1}}]" hidden><input type="text" class="form-control" name="id_divisi" value="{{$data->id_divisi}}" hidden><input value="{{$data->id_keahlian}}" name="id_keahlian[{{$no+1}}]" hidden>{{$data->keahlian}}</td>
-                          <td colspan="2"><input onblur="findTotal()" type="number" class="bobot" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
-                          <td><input onblur="findTotal()" value="{{$data->nilai}}" type="number" min="1" max="100" name="nilai[{{$no+1}}]" class="nilai" required/><br></td>
+                          <td><input onblur="findTotal()" type="number" class="bobot" value="{{$data->bobot}}" hidden/>{{$data->bobot}}%</td>
+                          <td colspan="2"><input style="width:100%" onblur="findTotal()" value="{{$data->nilai}}" type="number" min="1" max="100" name="nilai[{{$no+1}}]" class="nilai" required/><br></td>
                           <td><input onblur="findTotal()" type="number" step="0.01" name="bobot_nilai[{{$no+1}}]" id="bobot_nilai{{$i}}" value="{{$data->bobot_nilai}}"/></td>
                       </tr>
                       <?php $total_bobot += $data->bobot ?>
@@ -167,8 +167,8 @@
 
                       <tr>
                         <td colspan="5">Total</td>                    
-                        <td colspan="2">{{$total_bobot}}%</td>
-                        <td></td>
+                        <td>{{$total_bobot}}%</td>
+                        <th colspan="2">Saran Jabatan : </br>{{$jabatan->nama_divisi.'-'.$jabatan->bidang ?? '-'}}</th>
                         @foreach($totalkeahlian as $tk)
                         <th><input type="number" step="0.01" value="{{$tk->total}}" name="total" id="total"/></th>
                         @endforeach

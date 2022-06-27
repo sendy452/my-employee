@@ -106,6 +106,6 @@ Route::get('laporan-penilaian-keahlian', [LaporanKeahlianController::class, 'lap
 Route::get('export-keahlian-pdf/{bulan}/{id_karyawan}/{id_divisi}', [LaporanKeahlianController::class, 'exportKaryawanPDF']);
 Route::get('export-keahlian-excel/{bulan}/{id_karyawan}/{id_divisi}', [LaporanKeahlianController::class, 'exportKaryawanExcel']);
 Route::get('laporan-penilaian-keahlian-tahun', [LaporanKeahlianController::class, 'laporanTahun']);
-Route::get('export-keahlian-tahun-pdf/{tahun}/{id_karyawan}', [LaporanKeahlianController::class, 'exportTahun']);
+Route::get('export-keahlian-tahun-pdf/{tahun}/{id_divisi}/{id_karyawan}', [LaporanKeahlianController::class, 'exportTahun']);
 
 });

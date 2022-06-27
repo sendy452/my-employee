@@ -194,7 +194,7 @@ class LaporanKinerjaController extends Controller
         ->where('tb_total_kinerja.is_active',1)->where('tb_karyawan.id_karyawan', $id_karyawan)->where('bulan', 'LIKE', '%'.$tahun.'%')->orderBy('id_form', 'desc')->get();
         
         $pdf = PDF::loadview('export-kinerja-tahun', ['kinerja_tahun' => $kinerja_tahun, 'tahun' => $tahun]);
-        return $pdf->download('Laporan Kinerja Per Tahun '.$tahun.'-'.$kinerja_tahun[0]->nama.'.pdf');
+        return $pdf->download('Laporan Kinerja Per Tahun '.$tahun.' - '.$kinerja_tahun[0]->nama.'.pdf');
 
         //return view('export-kinerja-divisi', ['kinerja_divisi' => $kinerja_divisi]);
     }

@@ -143,8 +143,8 @@
 
                       <tr>
                         <th colspan="5">Faktor Kompetensi</th>
-                        <th colspan="2">Bobot</th>
-                        <th >Nilai (%)</th>
+                        <th>Bobot</th>
+                        <th colspan="2">Nilai (%)</th>
                         <th>Bobot x Nilai (%)</th>
                       </tr>
 
@@ -153,8 +153,8 @@
                       @foreach($penilaiankeahlian as $i => $data)
                       <tr>
                           <td colspan="5">{{$data->keahlian}}</td>
-                          <td colspan="2">{{$data->bobot}}%</td>
-                          <td>{{$data->nilai}}</td>
+                          <td>{{$data->bobot}}%</td>
+                          <td colspan="2">{{$data->nilai}}</td>
                           <td>{{$data->bobot_nilai}}</td>
                       </tr>
                       <?php $total_bobot += $data->bobot ?>
@@ -163,8 +163,8 @@
 
                       <tr>
                         <th colspan="5">Total</td>                    
-                        <th colspan="2">{{$total_bobot}}%</td>
-                        <td></td>
+                        <th>{{$total_bobot}}%</td>
+                        <th colspan="2">Saran Jabatan : </br>{{$jabatan->nama_divisi.'-'.$jabatan->bidang ?? '-'}}</th>
                         @foreach($totalkeahlian as $tk)
                         <th>{{$tk->total}}</th>
                         @endforeach

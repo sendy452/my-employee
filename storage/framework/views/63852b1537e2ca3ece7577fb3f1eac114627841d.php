@@ -5,12 +5,12 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Laporan Keahlian Per Divisi</h1>
+      <h1>Laporan Keahlian Per Jabatan</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>">Dashboard</a></li>
           <li class="breadcrumb-item">Laporan Keahlian</li>
-          <li class="breadcrumb-item active">Laporan Keahlian Per Divisi</li>
+          <li class="breadcrumb-item active">Laporan Keahlian Per Jabatan</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -30,7 +30,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Penilaian Keahlian Tiap Divisi</h5>
+              <h5 class="card-title">Laporan Keahlian Tiap Jabatan</h5>
               
               <!-- General Form Elements -->
               <form method="post" action="<?php echo e(url('laporan-penilaian-keahlian-divisi')); ?>">
@@ -38,7 +38,7 @@
                 <?php echo method_field("GET"); ?>
 
                 <div class="row mb-3">
-                  <label for="inputDivisi" class="col-sm-2 col-form-label">Pilih Divisi Tujuan</label>
+                  <label for="inputDivisi" class="col-sm-2 col-form-label">Pilih Jabatan Tujuan</label>
                   <div class="col-sm-10">
                   <select class="form-select" name="id_divisi">
                       <?php $__currentLoopData = $divisi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -76,7 +76,7 @@
   
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Penilaian Keahlian Per Divisi <a href="<?php echo e(url('export-keahlian-divisi-pdf/'.date('F-Y',strtotime($bulan)).'/'.$id_divisi)); ?>" type="button" class="btn btn-danger float-end" <?php echo e($bulan == null ? "hidden" : ""); ?>>Cetak PDF</a></h5>
+                <h5 class="card-title">Laporan Keahlian Per Jabatan <a href="<?php echo e(url('export-keahlian-divisi-pdf/'.date('F-Y',strtotime($bulan)).'/'.$id_divisi)); ?>" type="button" class="btn btn-danger float-end" <?php echo e($bulan == null ? "hidden" : ""); ?>>Cetak PDF</a></h5>
   
                 <div class="table-responsive">
                   <!-- Default Table -->
@@ -87,8 +87,8 @@
                       <th scope="col">NIP</th>
                       <th scope="col">Nama Karyawan</th>
                       <th scope="col">Email</th>
-                      <th scope="col">Divisi Asal</th>
-                      <th scope="col">Divisi Tujuan</th>
+                      <th scope="col">Jabatan Asal</th>
+                      <th scope="col">Jabatan Tujuan</th>
                       <th scope="col">Penilaian Bulan</th>
                       <th scope="col">Total Nilai</th>
                     </tr>

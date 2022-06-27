@@ -35,6 +35,7 @@
         <th scope="col">Divisi</th>
         <th scope="col">Penilaian Bulan</th>
         <th scope="col">Total Nilai</th>
+        <th scope="col">Keterangan</th>
         </tr>
     </thead>
     <tbody>        
@@ -47,7 +48,8 @@
         <td>{{$data->email}}</td>
         <td>{{$data->nama_divisi}} - {{$data->bidang}}</td>
         <td>{{$data->bulan}}</td>
-        <td>{{$data->total}}</td>
+        <td>{{$data->total}}/100</td>
+        <td>@if($data->total >= 1 && $data->total <= 25) Buruk @elseif($data->total >= 26 && $data->total <= 50) Sedang @elseif($data->total >= 51 && $data->total <= 75) Baik @elseif($data->total >= 76 && $data->total <= 100) Sangat Baik @endif</td>
         </tr>
         @endforeach
     </tbody>

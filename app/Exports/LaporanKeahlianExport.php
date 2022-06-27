@@ -34,8 +34,9 @@ class LaporanKeahlianExport implements FromView, WithStyles, ShouldAutoSize, Wit
         $totalkeahlianakhir = TotalKeahlian::where('id_divisi', $this->id_divisi)->where('is_active', 1)->where('bulan', date('F-Y',strtotime($this->bulan.'last month')))->where('id_karyawan',$this->id_karyawan)->get();
         $bio = User::leftJoin('tb_divisi', 'tb_karyawan.id_divisi', '=', 'tb_divisi.id_divisi')
             ->leftJoin('tb_role', 'tb_karyawan.id_role', '=', 'tb_role.id_role')->where('id_karyawan',$this->id_karyawan)->get();
+        $jabatan = TotalKeahlian::selectraw('tb_total_keahlian.id_divisi, total, nama_divisi, bidang')->leftJoin('tb_divisi', 'tb_total_keahlian.id_divisi', '=', 'tb_divisi.id_divisi')->where('id_karyawan', $this->id_karyawan)->orderBy('total', 'desc')->first();
 
-        return view('export-keahlian-karyawan', ['karyawan' => $karyawan, 'bio' => $bio, 'penilaiankeahlian' => $penilaiankeahlian, 'totalkeahlian' => $totalkeahlian, 'id_dv' => $this->id_divisi, 'totalkeahlianakhir' => $totalkeahlianakhir, 'bulan' => $this->bulan, 'divisi' => $divisi]);
+        return view('export-keahlian-karyawan', ['karyawan' => $karyawan, 'bio' => $bio, 'penilaiankeahlian' => $penilaiankeahlian, 'totalkeahlian' => $totalkeahlian, 'id_dv' => $this->id_divisi, 'totalkeahlianakhir' => $totalkeahlianakhir, 'bulan' => $this->bulan, 'divisi' => $divisi, 'jabatan' => $jabatan]);
     }
 
     public function registerEvents(): array

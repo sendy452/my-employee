@@ -38,12 +38,12 @@
                 <?php echo method_field("GET"); ?>
 
                 <div class="row mb-3">
-                    <label for="Jenis Kelamin" class="col-md-4 col-lg-3 col-form-label">Email Karyawan</label>
+                    <label for="Jenis Kelamin" class="col-md-4 col-lg-3 col-form-label">Nama Karyawan</label>
                     <div class="col-md-8 col-lg-9">
                         <select onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' class="form-select" name="idkaryawan">
-                            <option><h1>-----Pilih Email!-----</h1></option>
+                            <option><h1>-----Pilih Karyawan-----</h1></option>
                             <?php $__currentLoopData = $karyawan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($data->id_karyawan); ?>"><?php echo e($data->email); ?></option>
+                            <option value="<?php echo e($data->id_karyawan); ?>"><?php echo e($data->nama); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
@@ -143,8 +143,8 @@
 
                       <tr>
                         <th colspan="5">Faktor Kompetensi</th>
-                        <th colspan="2">Bobot</th>
-                        <th >Nilai (%)</th>
+                        <th>Bobot</th>
+                        <th colspan="2">Nilai (%)</th>
                         <th>Bobot x Nilai (%)</th>
                       </tr>
 
@@ -153,8 +153,8 @@
                       <?php $__currentLoopData = $penilaiankeahlian; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <tr>
                           <td colspan="5"><?php echo e($data->keahlian); ?></td>
-                          <td colspan="2"><?php echo e($data->bobot); ?>%</td>
-                          <td><?php echo e($data->nilai); ?></td>
+                          <td><?php echo e($data->bobot); ?>%</td>
+                          <td colspan="2"><?php echo e($data->nilai); ?></td>
                           <td><?php echo e($data->bobot_nilai); ?></td>
                       </tr>
                       <?php $total_bobot += $data->bobot ?>
@@ -163,8 +163,8 @@
 
                       <tr>
                         <th colspan="5">Total</td>                    
-                        <th colspan="2"><?php echo e($total_bobot); ?>%</td>
-                        <td></td>
+                        <th><?php echo e($total_bobot); ?>%</td>
+                        <th colspan="2">Saran Jabatan : </br><?php echo e($jabatan->nama_divisi.'-'.$jabatan->bidang ?? '-'); ?></th>
                         <?php $__currentLoopData = $totalkeahlian; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tk): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <th><?php echo e($tk->total); ?></th>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

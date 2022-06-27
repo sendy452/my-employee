@@ -75,7 +75,7 @@ $page = $components[1];
         <ul id="kinerja-nav" class="nav-content collapse <?php echo e($page =="laporan-penilaian-kinerja-divisi" || $page=="laporan-penilaian-kinerja" || $page=="laporan-penilaian-kinerja-tahun" ? "show" : ""); ?>" data-bs-parent="#sidebar-nav">
           <li>
             <a href="<?php echo e(url('laporan-penilaian-kinerja-divisi')); ?>" class="<?php echo e($page=="laporan-penilaian-kinerja-divisi" ? "active" : ""); ?>">
-              <i class="bi bi-circle"></i><span>Laporan Per Divisi</span>
+              <i class="bi bi-circle"></i><span>Laporan Per Jabatan</span>
             </a>
           </li>
           <li>
@@ -99,7 +99,7 @@ $page = $components[1];
         <ul id="keahlian-nav" class="nav-content collapse <?php echo e($page =="laporan-penilaian-keahlian-divisi" || $page=="laporan-penilaian-keahlian" || $page=="laporan-penilaian-keahlian-tahun" ? "show" : ""); ?>" data-bs-parent="#sidebar-nav">
           <li>
             <a href="<?php echo e(url('laporan-penilaian-keahlian-divisi')); ?>" class="<?php echo e($page=="laporan-penilaian-keahlian-divisi" ? "active" : ""); ?>">
-              <i class="bi bi-circle"></i><span>Laporan Per Divisi</span>
+              <i class="bi bi-circle"></i><span>Laporan Per Jabatan</span>
             </a>
           </li>
           <li>

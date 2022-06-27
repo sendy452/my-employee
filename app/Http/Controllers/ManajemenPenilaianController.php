@@ -302,7 +302,7 @@ class ManajemenPenilaianController extends Controller
         $totalkeahlian = TotalKeahlian::where('id_divisi', $request->id_divisi)->where('is_active', 1)->where('bulan', date('F-Y',strtotime($request->bulan)))->where('id_karyawan',$request->idkaryawan)->get();
         $totalkeahlianakhir = TotalKeahlian::where('id_divisi', $request->id_divisi)->where('is_active', 1)->where('bulan', date('F-Y',strtotime($request->bulan.'last month')))->where('id_karyawan',$request->idkaryawan)->get();
         $bio = "";
-       
+        $jabatan = TotalKeahlian::selectraw('tb_total_keahlian.id_divisi, total, nama_divisi, bidang')->leftJoin('tb_divisi', 'tb_total_keahlian.id_divisi', '=', 'tb_divisi.id_divisi')->where('id_karyawan', $request->idkaryawan)->orderBy('total', 'desc')->first();
         if ($request != "") {
 
             $data = $request->all();
@@ -330,7 +330,7 @@ class ManajemenPenilaianController extends Controller
             return redirect()->back()->withErrors($errors);
         }
         
-        return view('edit-penilaian-keahlian', ['karyawan' => $karyawan, 'bio' => $bio, 'penilaiankeahlian' => $penilaiankeahlian, 'totalkeahlian' => $totalkeahlian, 'id_dv' => $request->id_divisi, 'totalkeahlianakhir' => $totalkeahlianakhir, 'bulan' => $request->bulan, 'divisi' => $divisi]);
+        return view('edit-penilaian-keahlian', ['karyawan' => $karyawan, 'bio' => $bio, 'penilaiankeahlian' => $penilaiankeahlian, 'totalkeahlian' => $totalkeahlian, 'id_dv' => $request->id_divisi, 'totalkeahlianakhir' => $totalkeahlianakhir, 'bulan' => $request->bulan, 'divisi' => $divisi, 'jabatan' => $jabatan]);
     }
 
     public function changePenilaianKeahlian(Request $request)
