@@ -53,8 +53,8 @@
                     <i class="bi bi-clipboard-check"></i>
                   </div>
                   <div class="ps-2">
-                    <h6>{{$terbaik->total ?? 'Belum dinilai'}}</h6>
-                    <span class="text-muted small pt-2 ps-1">Penilaian Terendah</span> <span class="text-success small pt-1 fw-bold">{{$terendah->total ?? null}}</span>
+                    <h6>{{$terbaik->total.'/100' ?? 'Belum dinilai'}}</h6>
+                    <span class="text-muted small pt-2 ps-1">Penilaian Terendah</span> <span class="text-success small pt-1 fw-bold">{{$terendah->total.'/100' ?? null}}</span>
 
                   </div>
                 </div>
@@ -76,8 +76,8 @@
                     <i class="bi bi-award"></i>
                   </div>
                   <div class="ps-2">
-                    <h6>{{$keahlian->keahlian.'/100' ?? 'Belum dinilai'}}</h6>
-                    <span class="text-muted small pt-2 ps-1">Dengan nilai</span> <span class="text-danger small pt-1 fw-bold">{{$keahlian->nilai.'/100' ?? '0'}}%</span>
+                    <h6>{{$keahlian->keahlian ?? 'Belum dinilai'}}</h6>
+                    <span class="text-muted small pt-2 ps-1">Dengan nilai</span> <span class="text-danger small pt-1 fw-bold">{{$keahlian->nilai ?? '0'}}%</span>
                   </div>
                 </div>
 
