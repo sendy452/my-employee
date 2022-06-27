@@ -151,7 +151,7 @@ class LaporanKeahlianController extends Controller
         $datas = [];
         foreach ($labels as $no => $value) {
             //$datas[] = DB::statement('select IFNULL((select total from tb_total_kinerja where id_karyawan = '. $request->idkaryawan.' and bulan = "'.$value.'-'.$request->tahun.'"), 0)');
-            $datas[] = TotalKeahlian::select(\DB::raw('(CASE WHEN total = null THEN 0 ELSE total END) AS total'))->where(\DB::raw('id_karyawan'), $request->idkaryawan)->where(\DB::raw('bulan'), 'like', $value.'-%')->where(\DB::raw('bulan'), 'like', '%-'.$request->tahun)->first()->total ?? 0;
+            $datas[] = TotalKeahlian::select(\DB::raw('(CASE WHEN total = null THEN 0 ELSE total END) AS total'))->where(\DB::raw('id_karyawan'), $request->idkaryawan)->where(\DB::raw('id_divisi'), $request->id_divisi)->where(\DB::raw('bulan'), 'like', $value.'-%')->where(\DB::raw('bulan'), 'like', '%-'.$request->tahun)->first()->total ?? 0;
         }
 
         if ($request != "") {
@@ -160,7 +160,7 @@ class LaporanKeahlianController extends Controller
             $validator = Validator::make($data, [
                 'tahun' => 'string'
             ],[
-                'tahun.string' => 'Bulan harus dipilih.'
+                'tahun.string' => 'Tahun harus dipilih.'
             ]);
 
             //Send failed response if request is not valid
