@@ -53,8 +53,8 @@
                     <i class="bi bi-clipboard-check"></i>
                   </div>
                   <div class="ps-2">
-                    <h6>{{$terbaik->total.'/100' ?? 'Belum dinilai'}}</h6>
-                    <span class="text-muted small pt-2 ps-1">Penilaian Terendah</span> <span class="text-success small pt-1 fw-bold">{{$terendah->total.'/100' ?? null}}</span>
+                    <h6>{{$terbaik->total.' /100' ?? 'Belum dinilai'}}</h6>
+                    <span class="text-muted small pt-2 ps-1">Penilaian Terendah</span> <span class="text-success small pt-1 fw-bold">{{$terendah->total.' /100' ?? null}}</span>
 
                   </div>
                 </div>
